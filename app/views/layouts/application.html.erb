@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WSOB</title>
+    <%= csrf_meta_tags %>
+
+    <link href="https://fonts.googleapis.com/css?family=Arvo|Rajdhani|Tangerine" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <a href=<%= root_url %>><h1 class="brand"><span class="brand-series">World Series</span> <span class="brand-of">of</span> <span class="brand-baseball">Baseball</span></h1></a>
+      <ul class="nav">
+        <li class="nav-link"><a href="#">Home</a></li>
+        <li class="nav-link"><a href="#">Teams</a></li>
+        <li class="nav-link"><a href="#">Schedule</a></li>
+        <li class="nav-link"><a href="#">Standings</a></li>
+      </ul>
+    </nav>
+    <%= yield %>
+  </body>
+</html>

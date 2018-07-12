@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ body {
+   padding: 0;
+   margin: 0;
+   font-family: 'Roboto', sans-serif;
+ }
+.navbar {
+  height: 50px;
+  background-color: #333;
+  color: #0ff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  .nav {
+    list-style-type: none;
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    li {
+      display: inline-block;
+      font-size: 0.8em;
+      a {
+        text-decoration: none;
+        color: inherit;
+        &:hover,
+        &:active {
+          color: #ff0;
+        }
+      }
+    }
+    li ~ li {
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      padding-left: 1em;
+    }
+  }
+}
+
+.brand {
+  padding: 0;
+  margin: 0;
+  margin-left: 10px;
+  line-height: 50px;
+  float: left;
+  color: #0ff;
+  &:hover,
+  &:active {
+    color: #ff0;
+  }
+  .brand-series {
+    font-family: 'Rajdhani', sans-serif;
+  }
+  .brand-of {
+    font-family: 'Tangerine', cursive;
+    text-transform: lowercase;
+  }
+  .brand-baseball {
+    font-family: 'Arvo', serif;
+  }
+}
+
+
+ #injury:hover {
+  cursor: pointer;
+  color: #333333;
+ }

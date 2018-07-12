@@ -1,0 +1,12 @@
+<% players_to_rest.each do |pos, rest| %>
+  <% if rest != "No Rest" %>
+    <p><%= "#{pos}: #{rest}" %></p>
+  <% end %>
+<% end %>
+
+<div class="injury" id="injury">
+  <h2>Injured Player</h2>
+</div>
+
+<div id="injury-result">
+</div>
