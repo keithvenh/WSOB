@@ -1,12 +1,319 @@
-<% players_to_rest.each do |pos, rest| %>
-  <% if rest != "No Rest" %>
-    <p><%= "#{pos}: #{rest}" %></p>
-  <% end %>
-<% end %>
+<!-- ===== GENERAL CONTAINER FOR FLEXBOX ===== -->
+<div class="container">
+  <div class="todays-games">
+    <% @todays_games.each do |game| %>
+      <% vis = Team.find(game.visitor_id) %>
+      <% home = Team.find(game.home_id) %>
+      <div class="game <%= 'complete' if game.complete? %> <%= home.conference.downcase %>">
+        <div class="game-header">
+          <div class="game-loc"><%= home.city %></div>
+          <div class="game-date">
+            <% if game.complete? %>
+              <span class="final">F</span>
+            <% else %>
+              <span><%= game.date.strftime("%b %d") %></span>
+            <% end %>
+          </div>
 
-<div class="injury" id="injury">
-  <h2>Injured Player</h2>
-</div>
+        </div>
+        <div class="visitor">
+          <%= vis.name %><span class="record">(0-0)</span>
+        </div>
+        <div class="home">
+          <%= home.name %><span class="record">(0-0)</span>
+        </div>
+      </div>
 
-<div id="injury-result">
+    <% end %>
+  </div>
+
+  <div class="news">
+    <div class="recent-news">
+      <p>Another blown save, another extra-inning game. Brazil beats Colombia in 11</p>
+      <hr>
+      <p>Cuba blanks United Kingdom in 1-0 pitcher's duel</p>
+      <hr> 
+      <p>Pud Galvin throws one-hitter against Cuba</p>
+      <hr>
+      <p>Hammerin' Hank out for 2 games after getting hit on hand with pitch</p>
+      <hr>
+      <p>Hack Wilson breaks hand; out for 12 games</p>
+      <hr>
+      <p>Sosa hits walk-off double in 10th to beat Morocco</p>
+      <hr>
+      <p>Sosa hits walk-off homerun to beat Morocco</p>
+      <hr>
+      <p>John Olerud out for 3 games with bruise on ankle</p>
+    </div>
+  </div>
+
+  <div class="standings">
+    <div class="standings-table">
+      <div class="conference">
+        <div class="west active" id="stand-west">
+          West
+        </div><!--
+        --><div class="east" id="stand-east">
+          East
+        </div>
+      </div>
+      <div class="division" id="west-conf">
+        <div class="eur active" id="eur-div">Europe</div><!--
+        --><div class="nor" id="nor-div">North America</div><!--
+        --><div class="sou" id="sou-div">South America</div>
+      </div>
+      <div class="division" id="east-conf">
+        <div class="eur active" id="afr-div">Africa</div><!--
+        --><div class="nor" id="asi-div">Asia</div><!--
+        --><div class="sou" id="oce-div">Oceania</div>
+      </div>
+      <div id="west-table">
+        <div class="stand-table" id="stand-eur">
+          <table>
+            <%= render 'standings_table_header' %>
+            <tbody>
+              <% @teams.each do |team| %>
+                <% if team.division == 'Europe' %>
+                  <tr>
+                    <td class="name"><%= team.name %></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>.000</td>
+                    <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="stand-table" id="stand-nor">
+          <table>
+            <%= render 'standings_table_header' %>
+            <tbody>
+              <% @teams.each do |team| %>
+                <% if team.division == 'North America' %>
+                  <tr>
+                    <td class="name"><%= team.name %></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>.000</td>
+                    <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+          </table>
+        </div>
+        <div class="stand-table" id="stand-sou">
+          <table>
+            <%= render 'standings_table_header' %>
+            <tbody>
+              <% @teams.each do |team| %>
+                <% if team.division == 'South America' %>
+                  <tr>
+                    <td class="name"><%= team.name %></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>.000</td>
+                    <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="east-table">
+        <div class="stand-table" id="stand-afr">
+          <table>
+            <%= render 'standings_table_header' %>
+            <tbody>
+              <% @teams.each do |team| %>
+                <% if team.division == 'Africa' %>
+                  <tr>
+                    <td class="name"><%= team.name %></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>.000</td>
+                    <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="stand-table" id="stand-asi">
+          <table>
+            <%= render 'standings_table_header' %>
+            <tbody>
+              <% @teams.each do |team| %>
+                <% if team.division == 'Asia' %>
+                  <tr>
+                    <td class="name"><%= team.name %></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>.000</td>
+                    <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="stand-table" id="stand-oce">
+          <table>
+            <%= render 'standings_table_header' %>
+            <tbody>
+              <% @teams.each do |team| %>
+                <% if team.division == 'Oceania' %>
+                  <tr>
+                    <td class="name"><%= team.name %></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>.000</td>
+                    <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="league-leaders">
+      <div class="standings-table">
+        <div class="conference">
+          <div class="west active" id="stand-west">
+            West
+          </div><!--
+          --><div class="east" id="stand-east">
+            East
+          </div>
+        </div>
+        <div class="division" id="west-conf">
+          <div class="eur active" id="eur-div">Europe</div><!--
+          --><div class="nor" id="nor-div">North America</div><!--
+          --><div class="sou" id="sou-div">South America</div>
+        </div>
+        <div class="division" id="east-conf">
+          <div class="eur active" id="afr-div">Africa</div><!--
+          --><div class="nor" id="asi-div">Asia</div><!--
+          --><div class="sou" id="oce-div">Oceania</div>
+        </div>
+        <div id="west-table">
+          <div class="stand-table" id="stand-eur">
+            <table>
+              <%= render 'standings_table_header' %>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <% if team.division == 'Europe' %>
+                    <tr>
+                      <td class="name"><%= team.name %></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>.000</td>
+                      <td>-</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="stand-table" id="stand-nor">
+            <table>
+              <%= render 'standings_table_header' %>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <% if team.division == 'North America' %>
+                    <tr>
+                      <td class="name"><%= team.name %></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>.000</td>
+                      <td>-</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+            </table>
+          </div>
+          <div class="stand-table" id="stand-sou">
+            <table>
+              <%= render 'standings_table_header' %>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <% if team.division == 'South America' %>
+                    <tr>
+                      <td class="name"><%= team.name %></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>.000</td>
+                      <td>-</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="east-table">
+          <div class="stand-table" id="stand-afr">
+            <table>
+              <%= render 'standings_table_header' %>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <% if team.division == 'Africa' %>
+                    <tr>
+                      <td class="name"><%= team.name %></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>.000</td>
+                      <td>-</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="stand-table" id="stand-asi">
+            <table>
+              <%= render 'standings_table_header' %>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <% if team.division == 'Asia' %>
+                    <tr>
+                      <td class="name"><%= team.name %></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>.000</td>
+                      <td>-</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="stand-table" id="stand-oce">
+            <table>
+              <%= render 'standings_table_header' %>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <% if team.division == 'Oceania' %>
+                    <tr>
+                      <td class="name"><%= team.name %></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>.000</td>
+                      <td>-</td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+        
+  </div>
 </div>

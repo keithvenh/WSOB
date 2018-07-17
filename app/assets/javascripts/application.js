@@ -67,6 +67,88 @@ jQuery(document).ready(function() {
     }
     jQuery("#injury-result").html("<h2>" + injury + "</h2>");
     jQuery("#injury-result").append("<p>*If the total of this player's at-bats plus walks is grater than 599, the player is only injured for 3 games.</p>");
+
   });
+
+  jQuery("#stand-west").click(function() {
+    jQuery("#stand-west").removeClass('active');
+    jQuery('#stand-east').removeClass('active');
+    jQuery('#stand-west').addClass('active');
+    jQuery('#east-conf').css('display', 'none');
+    jQuery('#west-conf').css('display', 'block');
+    jQuery('#east-table').css('display', 'none');
+    jQuery('#west-table').css('display', 'block');
+  });
+
+  jQuery("#stand-east").click(function() {
+    jQuery("#stand-west").removeClass('active');
+    jQuery('#stand-east').removeClass('active');
+    jQuery('#stand-east').addClass('active');
+    jQuery('#west-conf').css('display', 'none');
+    jQuery('#east-conf').css('display', 'block');
+    jQuery('#west-table').css('display', 'none');
+    jQuery('#east-table').css('display', 'block');
+  });
+
+  jQuery("#sou-div").click(function() {
+    jQuery("#eur-div").removeClass('active');
+    jQuery('#nor-div').removeClass('active');
+    jQuery('#sou-div').removeClass('active');
+    jQuery('#sou-div').addClass('active');
+    jQuery('#stand-eur').css('display', 'none');
+    jQuery('#stand-nor').css('display', 'none');
+    jQuery('#stand-sou').css('display', 'block');
+  });
+
+  jQuery("#nor-div").click(function() {
+    jQuery("#eur-div").removeClass('active');
+    jQuery('#nor-div').removeClass('active');
+    jQuery('#sou-div').removeClass('active');
+    jQuery('#nor-div').addClass('active');
+    jQuery('#stand-eur').css('display', 'none');
+    jQuery('#stand-sou').css('display', 'none');
+    jQuery('#stand-nor').css('display', 'block');
+  });
+
+  jQuery("#eur-div").click(function() {
+    jQuery("#eur-div").removeClass('active');
+    jQuery('#nor-div').removeClass('active');
+    jQuery('#sou-div').removeClass('active');
+    jQuery('#eur-div').addClass('active');
+    jQuery('#stand-sou').css('display', 'none');
+    jQuery('#stand-nor').css('display', 'none');
+    jQuery('#stand-eur').css('display', 'block');
+  });
+
+  jQuery("#afr-div").click(function() {
+    jQuery("#afr-div").removeClass('active');
+    jQuery('#asi-div').removeClass('active');
+    jQuery('#oce-div').removeClass('active');
+    jQuery('#afr-div').addClass('active');
+    jQuery('#stand-asi').css('display', 'none');
+    jQuery('#stand-oce').css('display', 'none');
+    jQuery('#stand-afr').css('display', 'block');
+  });
+
+  jQuery("#asi-div").click(function() {
+    jQuery("#afr-div").removeClass('active');
+    jQuery('#asi-div').removeClass('active');
+    jQuery('#oce-div').removeClass('active');
+    jQuery('#asi-div').addClass('active');
+    jQuery('#stand-afr').css('display', 'none');
+    jQuery('#stand-oce').css('display', 'none');
+    jQuery('#stand-asi').css('display', 'block');
+  });
+
+  jQuery("#oce-div").click(function() {
+    jQuery("#afr-div").removeClass('active');
+    jQuery('#asi-div').removeClass('active');
+    jQuery('#oce-div').removeClass('active');
+    jQuery('#oce-div').addClass('active');
+    jQuery('#stand-afr').css('display', 'none');
+    jQuery('#stand-asi').css('display', 'none');
+    jQuery('#stand-oce').css('display', 'block');
+  });
+
 
 })

@@ -18,10 +18,19 @@
    padding: 0;
    margin: 0;
    font-family: 'Roboto', sans-serif;
+   background-image: url('baseball-diamond.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center right;
+   overflow-x: hidden;
  }
 .navbar {
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
   height: 50px;
   background-color: #333;
+  box-shadow: 0 1px 3px #788778;
   color: #0ff;
   margin: 0;
   text-transform: uppercase;
@@ -57,10 +66,10 @@
   margin-left: 10px;
   line-height: 50px;
   float: left;
-  color: #0ff;
+  color: #ff0;
   &:hover,
   &:active {
-    color: #ff0;
+    color: #0ff;
   }
   .brand-series {
     font-family: 'Rajdhani', sans-serif;
