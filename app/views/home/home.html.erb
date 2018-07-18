@@ -28,11 +28,21 @@
 
         <!-- Team Name and Record -->
         <div class="visitor">
-          <%= vis.name %><span class="record">(0-0)</span>
+          <%= vis.name %><span class="record">(0-1)</span>
         </div>
+        <% if game.complete? %>
+          <div class="score visitor-score">
+            2
+          </div>
+        <% end %>
         <div class="home">
-          <%= home.name %><span class="record">(0-0)</span>
+          <%= home.name %><span class="record">(1-0)</span>
         </div>
+        <% if game.complete? %>
+          <div class="score home-score">
+            6
+          </div>
+        <% end %>
       </div>
 
     <% end %>

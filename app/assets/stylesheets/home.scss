@@ -26,7 +26,7 @@
   display: inline-block;
   background: #fffdfb;
   box-shadow: 1px 1px 3px #788778;
-  width: 200px;
+  width: 215px;
   margin: 8px;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
@@ -55,12 +55,27 @@
   .home {
     padding: 6px;
     font-weight: 500;
+    display: inline-block;
+    float: left;
     .record {
       font-weight: 300;
       font-size: 0.7em;
       margin-left: 0.5em;
       line-height: 1.1em;
     }
+    
+
+  }
+  .home {
+    clear: both;
+  }
+  .score {
+    padding: 6px;
+    font-weight: 500;
+    display: inline-block;
+    float: right;
+    text-align: right;
+    padding-right: 12px;
 
   }
 }
@@ -89,6 +104,7 @@
       text-align: center;
       margin: 0;
       padding: 16px;
+      line-height: 1.5;
     }
     hr {
       width: 80%;
