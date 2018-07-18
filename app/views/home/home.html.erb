@@ -41,21 +41,11 @@
 <!-- ===== NEWS SEGMENT ===== -->
   <div class="news">
     <div class="recent-news">
-      <p>Another blown save, another extra-inning game. Brazil beats Colombia in 11</p>
-      <hr>
-      <p>Cuba blanks United Kingdom in 1-0 pitcher's duel</p>
-      <hr> 
-      <p>Pud Galvin throws one-hitter against Cuba</p>
-      <hr>
-      <p>Hammerin' Hank out for 2 games after getting hit on hand with pitch</p>
-      <hr>
-      <p>Hack Wilson breaks hand; out for 12 games</p>
-      <hr>
-      <p>Sosa hits walk-off double in 10th to beat Morocco</p>
-      <hr>
-      <p>Sosa hits walk-off homerun to beat Morocco</p>
-      <hr>
-      <p>John Olerud out for 3 games with bruise on ankle</p>
+      <h3 class="news-header">Latest News</h3>
+        <% @news.each do |news| %>
+          <p><%= news.story %></p>
+          <hr>
+        <% end %>
     </div>
   </div>
 

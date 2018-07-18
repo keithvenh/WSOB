@@ -74,6 +74,14 @@
     margin: 8px;
     background: #fffdfb;
     box-shadow: 1px 1px 3px #788778;
+    .news-header {
+      text-transform: uppercase;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: #777;
+      padding-left: 16px;
+      padding-top: 16px;
+    }
     p {
       color: #353739;
       font-size: 1.1em;
