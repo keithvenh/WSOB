@@ -1,12 +1,21 @@
 <!-- ===== GENERAL CONTAINER FOR FLEXBOX ===== -->
 <div class="container">
+
+<!-- ===== LISTS OUT GAMES BASED ON DATE ===== -->
   <div class="todays-games">
+
     <% @todays_games.each do |game| %>
+
+      <!-- Set Home and Visitor for Game -->
       <% vis = Team.find(game.visitor_id) %>
       <% home = Team.find(game.home_id) %>
+
+      <!-- Add complete class base on record -->
       <div class="game <%= 'complete' if game.complete? %> <%= home.conference.downcase %>">
         <div class="game-header">
           <div class="game-loc"><%= home.city %></div>
+
+          <!-- Select whether to show date or Final -->
           <div class="game-date">
             <% if game.complete? %>
               <span class="final">F</span>
@@ -16,6 +25,8 @@
           </div>
 
         </div>
+
+        <!-- Team Name and Record -->
         <div class="visitor">
           <%= vis.name %><span class="record">(0-0)</span>
         </div>
@@ -27,6 +38,7 @@
     <% end %>
   </div>
 
+<!-- ===== NEWS SEGMENT ===== -->
   <div class="news">
     <div class="recent-news">
       <p>Another blown save, another extra-inning game. Brazil beats Colombia in 11</p>
@@ -47,28 +59,35 @@
     </div>
   </div>
 
+<!-- ===== CLICKABLE STANDINGS -->
   <div class="standings">
     <div class="standings-table">
+
+<!-- Selectable Conference Buttons -->
       <div class="conference">
-        <div class="west active" id="stand-west">
+        <div class="conf-button west active" id="stand-west">
           West
         </div><!--
-        --><div class="east" id="stand-east">
+        --><div class="conf-button east" id="stand-east">
           East
         </div>
       </div>
+    
+<!-- Selectable Division Buttons -->
       <div class="division" id="west-conf">
-        <div class="eur active" id="eur-div">Europe</div><!--
-        --><div class="nor" id="nor-div">North America</div><!--
-        --><div class="sou" id="sou-div">South America</div>
+        <div class="west-div-button eur active" id="eur-div">Europe</div><!--
+        --><div class="west-div-button nor" id="nor-div">North America</div><!--
+        --><div class="west-div-button sou" id="sou-div">South America</div>
       </div>
       <div class="division" id="east-conf">
-        <div class="eur active" id="afr-div">Africa</div><!--
-        --><div class="nor" id="asi-div">Asia</div><!--
-        --><div class="sou" id="oce-div">Oceania</div>
+        <div class="east-div-button eur active" id="afr-div">Africa</div><!--
+        --><div class="east-div-button nor" id="asi-div">Asia</div><!--
+        --><div class="east-div-button sou" id="oce-div">Oceania</div>
       </div>
+
+<!-- STANDINGS TABLES -->
       <div id="west-table">
-        <div class="stand-table" id="stand-eur">
+        <div class="stand-table stand-table-west" id="stand-eur">
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
@@ -86,7 +105,7 @@
             </tbody>
           </table>
         </div>
-        <div class="stand-table" id="stand-nor">
+        <div class="stand-table stand-table-west" id="stand-nor">
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
@@ -103,7 +122,7 @@
               <% end %>
           </table>
         </div>
-        <div class="stand-table" id="stand-sou">
+        <div class="stand-table stand-table-west" id="stand-sou">
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
@@ -123,7 +142,7 @@
         </div>
       </div>
       <div id="east-table">
-        <div class="stand-table" id="stand-afr">
+        <div class="stand-table stand-table-east" id="stand-afr">
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
@@ -141,7 +160,7 @@
             </tbody>
           </table>
         </div>
-        <div class="stand-table" id="stand-asi">
+        <div class="stand-table stand-table-east" id="stand-asi">
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
@@ -159,7 +178,7 @@
             </tbody>
           </table>
         </div>
-        <div class="stand-table" id="stand-oce">
+        <div class="stand-table stand-table-east" id="stand-oce">
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
@@ -180,140 +199,189 @@
       </div>
     </div>
 
-    <div class="league-leaders">
-      <div class="standings-table">
-        <div class="conference">
-          <div class="west active" id="stand-west">
-            West
-          </div><!--
-          --><div class="east" id="stand-east">
-            East
-          </div>
-        </div>
-        <div class="division" id="west-conf">
-          <div class="eur active" id="eur-div">Europe</div><!--
-          --><div class="nor" id="nor-div">North America</div><!--
-          --><div class="sou" id="sou-div">South America</div>
-        </div>
-        <div class="division" id="east-conf">
-          <div class="eur active" id="afr-div">Africa</div><!--
-          --><div class="nor" id="asi-div">Asia</div><!--
-          --><div class="sou" id="oce-div">Oceania</div>
-        </div>
-        <div id="west-table">
-          <div class="stand-table" id="stand-eur">
-            <table>
-              <%= render 'standings_table_header' %>
-              <tbody>
-                <% @teams.each do |team| %>
-                  <% if team.division == 'Europe' %>
-                    <tr>
-                      <td class="name"><%= team.name %></td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>.000</td>
-                      <td>-</td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="stand-table" id="stand-nor">
-            <table>
-              <%= render 'standings_table_header' %>
-              <tbody>
-                <% @teams.each do |team| %>
-                  <% if team.division == 'North America' %>
-                    <tr>
-                      <td class="name"><%= team.name %></td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>.000</td>
-                      <td>-</td>
-                    </tr>
-                  <% end %>
-                <% end %>
-            </table>
-          </div>
-          <div class="stand-table" id="stand-sou">
-            <table>
-              <%= render 'standings_table_header' %>
-              <tbody>
-                <% @teams.each do |team| %>
-                  <% if team.division == 'South America' %>
-                    <tr>
-                      <td class="name"><%= team.name %></td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>.000</td>
-                      <td>-</td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div id="east-table">
-          <div class="stand-table" id="stand-afr">
-            <table>
-              <%= render 'standings_table_header' %>
-              <tbody>
-                <% @teams.each do |team| %>
-                  <% if team.division == 'Africa' %>
-                    <tr>
-                      <td class="name"><%= team.name %></td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>.000</td>
-                      <td>-</td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="stand-table" id="stand-asi">
-            <table>
-              <%= render 'standings_table_header' %>
-              <tbody>
-                <% @teams.each do |team| %>
-                  <% if team.division == 'Asia' %>
-                    <tr>
-                      <td class="name"><%= team.name %></td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>.000</td>
-                      <td>-</td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <div class="stand-table" id="stand-oce">
-            <table>
-              <%= render 'standings_table_header' %>
-              <tbody>
-                <% @teams.each do |team| %>
-                  <% if team.division == 'Oceania' %>
-                    <tr>
-                      <td class="name"><%= team.name %></td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>.000</td>
-                      <td>-</td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
+<!-- ===== LEAGUE LEADERS ===== -->
+  <div class="league-leaders">
+    <div class="categories">
+      <div class="league-leaders-button hitting active" id="leaders-hitting">
+        Hitting
+      </div><!--
+      --><div class="league-leaders-button pitching" id="leaders-pitching">
+        Pitching
       </div>
-
     </div>
-        
+    <div class="player-stats hitting-stats" id="hitting-stats">
+      <table>
+        <tr class="stat-title batting-avg">
+          <td>Batting Average</td>
+          <td class="statistic" rowspan="2">.667</td>
+        </tr>
+        <tr class="leader-name">
+          <td>John Olerud</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Russia &bull; 1B</td>
+          <td class="category">Avg</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Runs</td>
+          <td class="statistic" rowspan="2">6</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Sammy Sosa</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Russia &bull; RF</td>
+          <td class="category">R</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Home Runs</td>
+          <td class="statistic" rowspan="2">3</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Eddie Murray</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Japan &bull; 1B</td>
+          <td class="category">HR</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Runs Batted In</td>
+          <td class="statistic" rowspan="2">3</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Eddie Murray</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Japan &bull; 1B</td>
+          <td class="category">RBI</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Hits</td>
+          <td class="statistic" rowspan="2">9</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Ty Cobb</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Morocco &bull; CF</td>
+          <td class="category">H</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Stolen Bases</td>
+          <td class="statistic" rowspan="2">3</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Ty Cobb</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Morocco &bull; CF</td>
+          <td class="category">SB</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Doubles</td>
+          <td class="statistic" rowspan="2">4</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Craig Biggio</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Russia &bull; 2B</td>
+          <td class="category">2B</td>
+        </tr>
+      </table>
+    </div>
+    <div class="player-stats pitching-stats" id="pitching-stats">
+      <table>
+        <tr class="stat-title batting-avg">
+          <td>Wins</td>
+          <td class="statistic" rowspan="2">1</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Don Drysdale</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Morocco &bull; P</td>
+          <td class="category">W</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Saves</td>
+          <td class="statistic" rowspan="2">1</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Kerry Lightenberg</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Morocco &bull; P</td>
+          <td class="category">SV</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Earned Run Average</td>
+          <td class="statistic" rowspan="2">0.00</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Ferguson Jenkins</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Cuba &bull; P</td>
+          <td class="category">ERA</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Strikeouts</td>
+          <td class="statistic" rowspan="2">11</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Catfish Hunter</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Cuba &bull; P</td>
+          <td class="category">SO</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>WHIP</td>
+          <td class="statistic" rowspan="2">.56</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Pud Galvin</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">United Kingdom &bull; P</td>
+          <td class="category">WHIP</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Batters Faced</td>
+          <td class="statistic" rowspan="2">44</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Al Spalding</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Japan &bull; P</td>
+          <td class="category">BF</td>
+        </tr>
+
+        <tr class="stat-title batting-avg">
+          <td>Strikeouts per Walk</td>
+          <td class="statistic" rowspan="2">3.00</td>
+        </tr>
+        <tr class="leader-name">
+          <td>Pedro Martinez</td>
+        </tr>
+        <tr class="information">
+          <td class="leader-team leader-position">Russia &bull; P</td>
+          <td class="category">K/BB</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>

@@ -98,15 +98,19 @@
 .standings {
   flex: 0 0 400px;
   padding: 12px;
-  .standings-table {
+  .standings-table,
+  .league-leaders {
     margin: 8px;
     background: #fffdfb;
     box-shadow: 1px 1px 3px #788778;
     color: #353739;
     font-weight: 300;
-    .conference {
+    .conference,
+    .categories {
       .west,
-      .east {
+      .east,
+      .hitting,
+      .pitching {
         font-weight: 500;
         margin: 0;
         display: inline-block;
@@ -222,15 +226,53 @@
       }
     }
   }
-
-  .league-leaders {
-    background: #fffdfb;
-    box-shadow: 1px 1px 3px #788778;
-    height: 500px;
-    margin: 8px;
-    margin-top: 16px;
+  // ===== LEAGUE LEADERS ===== //
+#pitching-stats {
+  display: none;
+}
+.league-leaders {
+  margin-top: 24px;
+  .hitting-stats,
+  .pitching-stats {
+    table {
+      border-collapse: collapse;
+      margin: 8px auto;
+      width: 95%;
+      .stat-title {
+        font-weight: 500;
+        font-size: 0.8em;
+        .statistic {
+          font-size: 2.5em;
+          text-align: right;
+          vertical-align: bottom;
+        }
+        td {
+          padding-top: 8px;
+        }
+      }
+      .leader-name {
+        font-weight: 500;
+        font-size: 1.2em;
+      }
+      .leader-team {
+        font-weight: 500;
+        font-size: 0.8em;
+        color: #777;
+        text-transform: uppercase;
+        border-bottom: 1px solid #ccc;
+      }
+      .category {
+        text-align: right;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.8em;
+        padding-right: 5px;
+        border-bottom: 1px solid #ccc;
+      }
+      .information td {
+        padding-bottom: 8px;
+      }
+    }
   }
 }
-
-// ===== LEAGUE LEADERS ===== //@at-root
-
+}
