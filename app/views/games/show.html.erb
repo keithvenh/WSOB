@@ -1,0 +1,378 @@
+<div class="game-container">
+  <div class="container">
+    <div class="visitor">
+      <h3><%= @game.visitor.name %></h3>
+      <p>(0-0)</p>
+    </div>
+
+    <div class="game-info">
+      <% if @game.complete? %>
+        <h2>Russia 6, Morocco 2</h2>
+        <p><%= @game.date.strftime('%A, %B %-d, %Y') %>
+        <table>
+          <thead>
+            <tr>
+              <th class="final">FINAL</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+              <th>7</th>
+              <th>8</th>
+              <th>9</th>
+              <th class="break"></th>
+              <th class="totals">R</th>
+              <th class="totals">H</th>
+              <th class="totals">E</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="team-name"><%= @game.visitor.name[0..2] %></td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td></td>
+              <td class="totals">2</td>
+              <td class="totals">8</td>
+              <td class="totals">0</td>
+            </tr>
+            <tr>
+              <td class="team-name"><%= @game.home.name[0..2] %></td>
+              <td>2</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td></td>
+              <td class="totals">6</td>
+              <td class="totals">10</td>
+              <td class="totals">1</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan='14'>
+                <div class="pitchers">
+                  <p><span class="win">W: K. Brown(1-0)</span> <span class="loss">L: J. Palmer (0-1)</span> <span class="save"></span>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+          
+      <% else %>
+        <h2><%= @game.visitor.name %> @ <%= @game.home.name %></h2>
+        <p><%= @game.date.strftime('%B %-d, %Y') %></p>
+        <p class="game-loc"><%= @game.home.city %> &bull; <%= @game.home.name %></p>
+      <% end %>
+    </div>
+
+    <div class="home">
+      <h3><%= @game.home.name %></h3>
+      <p>(0-0)</p>
+    </div>
+  </div>
+  <div class="container">
+    <% if @game.complete? %>
+      <div class="team-info visitor-info">
+        <table>
+          <thead>
+            <tr>
+              <th><%= @game.visitor.name %> Batters</th>
+              <th>AB</th>
+              <th>R</th>
+              <th>H</th>
+              <th>RBI</th>
+              <th>SO</th>
+              <th>BB</th>
+              <th>SB</th>
+              <th>EBH</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="player-name"><span class="order">1</span> Henderson <em class="pos">LF</em></td>
+              <td>4</td>
+              <td>1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="team-info home-info">
+        <table>
+          <thead>
+            <tr>
+              <th><%= @game.home.name %> Batters</th>
+              <th>AB</th>
+              <th>R</th>
+              <th>H</th>
+              <th>RBI</th>
+              <th>SO</th>
+              <th>BB</th>
+              <th>SB</th>
+              <th>EBH</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="player-name"><span class="order">1</span> Biggio <em class="pos">2B</em></td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    <% else %>
+    <div class="team-info visitor-info">
+      <h5 class="starting-pitcher">Jim Palmer, RHP</h5>
+      <p class="pitcher-record">0-0</p>
+      <p class="pitcher-stats">0.00 ERA &bull; 0 K</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Batters</th>
+            <th>Avg</th>
+            <th>AB</th>
+            <th>HR</th>
+            <th>RBI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="player-name">Appling, Luke</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Cobb, Ty</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Dawson, Andre</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Fernandez, Tony</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Greer, Rusty</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Henderson, Rickey</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Henley, Bob</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Johnson, Judy</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Sandberg, Ryne</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Santop, Louis</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Segui, David</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Suttles, Mule</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Ward, John</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="team-info home-info">
+      <h5 class="starting-pitcher">Kevin Brown, RHP</h5>
+      <p class="pitcher-record">0-0</p>
+      <p class="pitcher-stats">0.00 ERA &bull; 0 K </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Batters</th>
+            <th>Avg</th>
+            <th>AB</th>
+            <th>HR</th>
+            <th>RBI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="player-name">Bako, Paul</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Belle, Albert</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Biggio, Craig</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Bonds, Barry</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Castilla, Vinny</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Garciaparra, Nomar</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Guerrero, Vladimir</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Mueller, Bill</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Olerud, John</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Piazza, Mike</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Sexson, Richie</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Sosa, Sammy</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td class="player-name">Williams, Bernie</td>
+            <td>.000</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <% end %>
+  </div>
+</div>

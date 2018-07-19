@@ -1,3 +1,4 @@
+<div class="home-container">
 <!-- ===== GENERAL CONTAINER FOR FLEXBOX ===== -->
 <div class="container">
 
@@ -9,7 +10,7 @@
       <!-- Set Home and Visitor for Game -->
       <% vis = Team.find(game.visitor_id) %>
       <% home = Team.find(game.home_id) %>
-
+    <a href="<%= game_path(game) %>">
       <!-- Add complete class base on record -->
       <div class="game <%= 'complete' if game.complete? %> <%= home.conference.downcase %>">
         <div class="game-header">
@@ -44,7 +45,7 @@
           </div>
         <% end %>
       </div>
-
+    </a>
     <% end %>
   </div>
 
@@ -384,4 +385,5 @@
       </table>
     </div>
   </div>
+</div>
 </div>

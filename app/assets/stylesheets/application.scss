@@ -18,11 +18,14 @@
    padding: 0;
    margin: 0;
    font-family: 'Roboto', sans-serif;
-   background-image: url('baseball-diamond.jpg');
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-position: center right;
    overflow-x: hidden;
+ }
+
+ .home-container {
+  background-image: url('baseball-diamond.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center right;
  }
 .navbar {
   position: fixed;

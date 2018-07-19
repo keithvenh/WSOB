@@ -1,0 +1,142 @@
+.game-container {
+  padding-top: 100px;
+  background: #000;
+  min-height: 100vh;
+  .container {
+    background: #fffdfb;
+    text-align: center;
+    align-items: center;
+  }
+  .visitor,
+  .home {
+    flex: 1 1 30%;
+    color: #333;
+    h3 {
+      font-weight: 200;
+      text-transform: uppercase;
+      font-size: 3em;
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      margin: 0;
+      font-weight: 300;
+      font-size: 0.8em;
+    }
+  }
+  .game-info {
+    flex: 1 1 40%;
+    color: #777;
+    h2 {
+      font-size: 1.5em;
+      margin: 0;
+      padding: 0;
+      font-weight: 400;
+    }
+    p {
+      margin: 4px;
+    }
+    .game-loc {
+      font-variant: small-caps;
+    }
+    table {
+      margin: 16px auto 0 auto;
+      border-collapse: collapse;
+      font-size: 0.8em;
+      font-weight: 400;
+      color: #333;
+      .totals {
+        font-weight: 500;
+      }
+      thead {
+        background: #f0f0f0;
+        padding: 4px;
+        font-size: 0.75em;
+        th {
+          font-weight: 400;
+        }
+        .final {
+          text-align: left;
+          padding: 6px;
+        }
+        .break {
+          width: 24px;
+        }
+
+      }
+      tbody {
+        tr {
+          background: #f7f7f7;
+          td {
+            padding: 6px;
+          }
+          .team-name {
+            text-align: left;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding-right: 24px;
+          }
+        }
+      }
+    }
+    .pitchers {
+      text-align: left;
+      font-size: 0.8em;
+      color: #333;
+      font-weight: 500;
+      span {
+        display: inline-block;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .team-info {
+    flex: 1 1 50%;
+    color: #444;
+    .starting-pitcher {
+      font-size: 1.2em;
+      margin: 0;
+      padding: 0;
+    }
+    .pitcher-record,
+    .pitcher-stats {
+      margin: 0;
+      margin-top: 4px;
+    }
+    table {
+      width: 80%;
+      margin: 12px auto;
+      margin-bottom: 24px;
+      border-collapse: collapse;
+      th {
+        background: #003d73;
+        color: #fffdfb;
+        text-transform: uppercase;
+        padding: 6px;
+        font-size: 0.8em;
+      }
+      td {
+        padding: 6px;
+        font-size: 0.8em;
+      }
+      tr:nth-child(even) {
+        background-color: #eee;
+      }
+      .player-name {
+        text-align: left;
+        font-weight: 400;
+        .order {
+          font-weight: 500;
+          color: #777;
+        }
+        .pos {
+          font-weight: 500;
+          font-size: 0.75em;
+        }
+      }
+    }
+  }
+  
+
+}
