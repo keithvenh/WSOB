@@ -10,6 +10,7 @@
       <!-- Set Home and Visitor for Game -->
       <% vis = Team.find(game.visitor_id) %>
       <% home = Team.find(game.home_id) %>
+      <% records = [team_wins_losses(vis, game.date), team_wins_losses(home, game.date)] %>
     <a href="<%= game_path(game) %>">
       <!-- Add complete class base on record -->
       <div class="game <%= 'complete' if game.complete? %> <%= home.conference.downcase %>">
@@ -19,7 +20,8 @@
           <!-- Select whether to show date or Final -->
           <div class="game-date">
             <% if game.complete? %>
-              <span class="final">F</span>
+              <% inn = Inning.where(game_id: game.id).count %>
+              <span class="final">F<%= "/#{inn}" if inn > 9 %></span>
             <% else %>
               <span><%= game.date.strftime("%b %d") %></span>
             <% end %>
@@ -29,19 +31,19 @@
 
         <!-- Team Name and Record -->
         <div class="visitor">
-          <%= vis.name %><span class="record">(0-1)</span>
+          <%= vis.name %><span class="record">(<%= "#{records[0][0]}-#{records[0][1]}" %>)</span>
         </div>
         <% if game.complete? %>
           <div class="score visitor-score">
-            2
+            <%= game.vis_runs %>
           </div>
         <% end %>
         <div class="home">
-          <%= home.name %><span class="record">(1-0)</span>
+          <%= home.name %><span class="record">(<%= "#{records[1][0]}-#{records[1][1]}" %>)</span>
         </div>
         <% if game.complete? %>
           <div class="score home-score">
-            6
+            <%= game.home_runs %>
           </div>
         <% end %>
       </div>
@@ -92,16 +94,14 @@
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
-              <% @teams.each do |team| %>
-                <% if team.division == 'Europe' %>
-                  <tr>
-                    <td class="name"><%= team.name %></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>.000</td>
-                    <td>-</td>
-                  </tr>
-                <% end %>
+              <% standings("Europe").each do |t, s| %>
+                <tr>
+                  <td class="name"><%= t %></td>
+                  <td><%= s[:wins] %></td>
+                  <td><%= s[:losses] %></td>
+                  <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
+                  <td>-</td>
+                </tr>
               <% end %>
             </tbody>
           </table>
@@ -110,16 +110,14 @@
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
-              <% @teams.each do |team| %>
-                <% if team.division == 'North America' %>
-                  <tr>
-                    <td class="name"><%= team.name %></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>.000</td>
-                    <td>-</td>
-                  </tr>
-                <% end %>
+              <% standings("North America").each do |t, s| %>
+                <tr>
+                  <td class="name"><%= t %></td>
+                  <td><%= s[:wins] %></td>
+                  <td><%= s[:losses] %></td>
+                  <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
+                  <td>-</td>
+                </tr>
               <% end %>
           </table>
         </div>
@@ -127,16 +125,14 @@
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
-              <% @teams.each do |team| %>
-                <% if team.division == 'South America' %>
-                  <tr>
-                    <td class="name"><%= team.name %></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>.000</td>
-                    <td>-</td>
-                  </tr>
-                <% end %>
+              <% standings("South America").each do |t, s| %>
+                <tr>
+                  <td class="name"><%= t %></td>
+                  <td><%= s[:wins] %></td>
+                  <td><%= s[:losses] %></td>
+                  <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
+                  <td>-</td>
+                </tr>
               <% end %>
             </tbody>
           </table>
@@ -147,16 +143,14 @@
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
-              <% @teams.each do |team| %>
-                <% if team.division == 'Africa' %>
-                  <tr>
-                    <td class="name"><%= team.name %></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>.000</td>
-                    <td>-</td>
-                  </tr>
-                <% end %>
+              <% standings("Africa").each do |t, s| %>
+                <tr>
+                  <td class="name"><%= t %></td>
+                  <td><%= s[:wins] %></td>
+                  <td><%= s[:losses] %></td>
+                  <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
+                  <td>-</td>
+                </tr>
               <% end %>
             </tbody>
           </table>
@@ -165,16 +159,14 @@
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
-              <% @teams.each do |team| %>
-                <% if team.division == 'Asia' %>
-                  <tr>
-                    <td class="name"><%= team.name %></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>.000</td>
-                    <td>-</td>
-                  </tr>
-                <% end %>
+              <% standings("Asia").each do |t, s| %>
+                <tr>
+                  <td class="name"><%= t %></td>
+                  <td><%= s[:wins] %></td>
+                  <td><%= s[:losses] %></td>
+                  <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
+                  <td>-</td>
+                </tr>
               <% end %>
             </tbody>
           </table>
@@ -183,16 +175,14 @@
           <table>
             <%= render 'standings_table_header' %>
             <tbody>
-              <% @teams.each do |team| %>
-                <% if team.division == 'Oceania' %>
-                  <tr>
-                    <td class="name"><%= team.name %></td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>.000</td>
-                    <td>-</td>
-                  </tr>
-                <% end %>
+              <% standings("Oceania").each do |t, s| %>
+                <tr>
+                  <td class="name"><%= t %></td>
+                  <td><%= s[:wins] %></td>
+                  <td><%= s[:losses] %></td>
+                  <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
+                  <td>-</td>
+                </tr>
               <% end %>
             </tbody>
           </table>

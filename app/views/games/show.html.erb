@@ -2,26 +2,21 @@
   <div class="container">
     <div class="visitor">
       <h3><%= @game.visitor.name %></h3>
-      <p>(0-0)</p>
+      <% vis_record = team_wins_losses(@game.visitor, @game.date) %>
+      <p>(<%= vis_record[0] %>-<%= vis_record[1] %>)</p>
     </div>
 
     <div class="game-info">
       <% if @game.complete? %>
-        <h2>Russia 6, Morocco 2</h2>
+        <h2><%= @game.winner.name %> <%= @game.winner == @game.home ? @game.home_runs : @game.vis_runs %>, <%= @game.loser.name %> <%= @game.loser == @game.home ? @game.home_runs : @game.vis_runs %></h2>
         <p><%= @game.date.strftime('%A, %B %-d, %Y') %>
         <table>
           <thead>
             <tr>
               <th class="final">FINAL</th>
-              <th>1</th>
-              <th>2</th>
-              <th>3</th>
-              <th>4</th>
-              <th>5</th>
-              <th>6</th>
-              <th>7</th>
-              <th>8</th>
-              <th>9</th>
+              <% @innings.each do |i| %>
+                <th><%= i.inning %></th>
+              <% end %>
               <th class="break"></th>
               <th class="totals">R</th>
               <th class="totals">H</th>
@@ -31,42 +26,37 @@
           <tbody>
             <tr>
               <td class="team-name"><%= @game.visitor.name[0..2] %></td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>2</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <% @innings.each do |i| %>
+                <td><%= i.vis_runs %></td>
+              <% end %>
               <td></td>
-              <td class="totals">2</td>
-              <td class="totals">8</td>
-              <td class="totals">0</td>
+              <td class="totals"><%= @game.vis_runs %></td>
+              <td class="totals"><%= @game.vis_hits %></td>
+              <td class="totals"><%= @game.vis_errors %></td>
             </tr>
             <tr>
               <td class="team-name"><%= @game.home.name[0..2] %></td>
-              <td>2</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>1</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
+              <% @innings.each do |i| %>
+                <td><%= i.home_runs %></td>
+              <% end %>
               <td></td>
-              <td class="totals">6</td>
-              <td class="totals">10</td>
-              <td class="totals">1</td>
+              <td class="totals"><%= @game.home_runs %></td>
+              <td class="totals"><%= @game.home_hits %></td>
+              <td class="totals"><%= @game.home_errors %></td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <td colspan='14'>
                 <div class="pitchers">
-                  <p><span class="win">W: K. Brown(1-0)</span> <span class="loss">L: J. Palmer (0-1)</span> <span class="save"></span>
+                  <% winner = PitchingStat.where(game: @game, w: true).first %>
+                  <% w_rec = pitcher_wins_losses(winner.player, @game) %>
+                  
+                  <% loser = PitchingStat.where(game: @game, l: true).first %>
+                  <% l_rec = pitcher_wins_losses(loser.player, @game) %>
+
+                  <% save = PitchingStat.where(game: @game, s: true).first %>
+                  <p><span class="win">W: <%= "#{winner.player.first_name[0]}. #{winner.player.last_name}" %> (<%= "#{w_rec[0]}-#{w_rec[1]}" %>)</span> <span class="loss">L: <%= "#{loser.player.first_name[0]}. #{loser.player.last_name}" %> (<%= "#{l_rec[0]}-#{l_rec[1]}" %>)</span> <span class="save"></span>
                 </div>
               </td>
             </tr>
@@ -82,7 +72,8 @@
 
     <div class="home">
       <h3><%= @game.home.name %></h3>
-      <p>(0-0)</p>
+      <% home_record = team_wins_losses(@game.home, @game.date) %>
+      <p>(<%= home_record[0] %>-<%= home_record[1] %>)</p>
     </div>
   </div>
   <div class="container">
@@ -103,17 +94,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="player-name"><span class="order">1</span> Henderson <em class="pos">LF</em></td>
-              <td>4</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>2</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-            </tr>
+            <% vis_stats = BattingStat.where(game_id: @game.id, team_id: @game.visitor.id) %>
+            <% vis_stats.each do |bs| %>
+              <tr>
+                <td class="player-name"><span class="order"><%= bs.order %></span> <%= bs.player.last_name %> <em class="pos"><%= pos_to_string(bs.pos) %></em></td>
+                <td><%= bs.ab %></td>
+                <td><%= bs.r %></td>
+                <td><%= bs.h %></td>
+                <td><%= bs.rbi %></td>
+                <td><%= bs.so %></td>
+                <td><%= bs.bb + bs.hbp %></td>
+                <td><%= bs.sb %></td>
+                <td><%= bs.do + bs.tr + bs.hr %></td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
@@ -134,17 +128,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="player-name"><span class="order">1</span> Biggio <em class="pos">2B</em></td>
-              <td>3</td>
-              <td>2</td>
-              <td>2</td>
-              <td>0</td>
-              <td>0</td>
-              <td>1</td>
-              <td>1</td>
-              <td>2</td>
-            </tr>
+            <% home_stats = BattingStat.where(game_id: @game.id, team_id: @game.home.id) %>
+            <% home_stats.each do |bs| %>
+              <tr>
+                <td class="player-name"><span class="order"><%= bs.order %></span> <%= bs.player.last_name %> <em class="pos"><%= pos_to_string(bs.pos) %></em></td>
+                <td><%= bs.ab %></td>
+                <td><%= bs.r %></td>
+                <td><%= bs.h %></td>
+                <td><%= bs.rbi %></td>
+                <td><%= bs.so %></td>
+                <td><%= bs.bb + bs.hbp %></td>
+                <td><%= bs.sb %></td>
+                <td><%= bs.do + bs.tr + bs.hr %></td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>

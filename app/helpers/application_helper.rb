@@ -67,4 +67,73 @@ module ApplicationHelper
 
 
   end
+
+  def team_wins_losses(team, date)
+
+    games = Game.where("date <= ?", date)
+
+    wins = games.where(winner: team.id).count
+
+    losses = games.where(loser: team.id).count
+
+    return [wins, losses]
+  end
+
+  def pitcher_wins_losses(player, game)
+
+    games = PitchingStat.where("game_id <= ?", game.id) 
+
+    games = games.where(player_id: player.id)
+
+    wins = games.where(w: true).count
+
+    losses = games.where(l: true).count
+
+    return [wins, losses]
+  end
+
+  def standings(div)
+    teams = Team.where(division: div)
+
+    team_list = {}
+
+    teams.each do |t|
+      rec = team_wins_losses(t, Date.today)
+      team_list.store(t.name, { :wins => rec[0], :losses => rec[1], :win_pct => (rec[0]+rec[1] > 0) ? ((rec[0].to_f)/(rec[0]+rec[1])) : 0.000 })
+    end
+
+    return team_list.sort_by { |k,v| v[:win_pct] }.reverse
+
+
+    
+  end
+
+  def pos_to_string(pos)
+    case pos
+    when 1
+      return "P"
+    when 2
+      return "C"
+    when 3
+      return "1B"
+    when 4
+      return "2B"
+    when 5
+      return "3B"
+    when 6
+      return "SS"
+    when 7
+      return "LF"
+    when 8
+      return "CF"
+    when 9
+      return "RF"
+    when 10
+      return "DH"
+    when 11
+      return "PH"
+    when 12
+      return "PR"
+    end
+  end
 end

@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game: one
+  team: one
+  player: one
+  start: false
+  order: 1
+  pos: 1
+  ab: 1
+  r: 1
+  h: 1
+  rbi: 1
+  so: 1
+  bb: 1
+  hbp: 1
+  sac: 1
+  sb: 1
+  do: 1
+  tr: 1
+  hr: 1
+
+two:
+  game: two
+  team: two
+  player: two
+  start: false
+  order: 1
+  pos: 1
+  ab: 1
+  r: 1
+  h: 1
+  rbi: 1
+  so: 1
+  bb: 1
+  hbp: 1
+  sac: 1
+  sb: 1
+  do: 1
+  tr: 1
+  hr: 1

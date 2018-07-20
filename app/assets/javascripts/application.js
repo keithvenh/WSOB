@@ -16,7 +16,7 @@
 //= require_tree .
 
 
-jQuery(document).ready(function() {
+jQuery(document).on('turbolinks:load', function() {
   jQuery("#injury").click(function() {
     let twenty_sided = Math.floor(Math.random() *20);
     let injury = "OK";
