@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team: one
+  pos: 1
+  first: one
+  second: one
+  third: one
+  fourth: one
+  fifth: one
+
+two:
+  team: two
+  pos: 1
+  first: two
+  second: two
+  third: two
+  fourth: two
+  fifth: two

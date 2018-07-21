@@ -1,0 +1,29 @@
+<div class="team-container">
+  <div class="team-details">
+    <div class="heading">
+      <h2><%= @team.name %></h2>
+      <% record = team_wins_losses(@team, Date.today) %>
+      <p>(<%= "#{record[0]}-#{record[1]}" %>)</p>
+    </div>
+
+    <h3>Roster</h3>
+    <ol>
+      <% @players.each do |p| %>
+        <li><%= "#{p.last_name}, #{p.first_name}" %></li>
+      <% end %>
+    </ol>
+
+    <h3>Lineup</h3>
+    <ol>
+      <li><%= pos_to_string(@lineup.one_pos) %> <%= @lineup.one_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.two_pos) %> <%= @lineup.two_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.three_pos) %> <%= @lineup.three_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.four_pos) %> <%= @lineup.four_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.five_pos) %> <%= @lineup.five_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.six_pos) %> <%= @lineup.six_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.seven_pos) %> <%= @lineup.seven_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.eight_pos) %> <%= @lineup.eight_player.last_name %></li>
+      <li><%= pos_to_string(@lineup.nine_pos) %> <%= @lineup.nine_player.last_name %></li>
+    </ol>
+  </div>
+</div>

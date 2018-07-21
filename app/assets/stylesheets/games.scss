@@ -17,6 +17,14 @@
       font-size: 3em;
       margin: 0;
       padding: 0;
+      a {
+        text-decoration: none;
+        color: #333;
+        &:hover,
+        &:active {
+          color: #000;
+        }
+      }
     }
     p {
       margin: 0;

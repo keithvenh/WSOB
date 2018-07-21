@@ -96,7 +96,7 @@
             <tbody>
               <% standings("Europe").each do |t, s| %>
                 <tr>
-                  <td class="name"><%= t %></td>
+                  <td class="name"><%= link_to t, team_path(s[:id]) %></td>
                   <td><%= s[:wins] %></td>
                   <td><%= s[:losses] %></td>
                   <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
@@ -112,7 +112,7 @@
             <tbody>
               <% standings("North America").each do |t, s| %>
                 <tr>
-                  <td class="name"><%= t %></td>
+                  <td class="name"><%= link_to t, team_path(s[:id]) %></td>
                   <td><%= s[:wins] %></td>
                   <td><%= s[:losses] %></td>
                   <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
@@ -127,7 +127,7 @@
             <tbody>
               <% standings("South America").each do |t, s| %>
                 <tr>
-                  <td class="name"><%= t %></td>
+                  <td class="name"><%= link_to t, team_path(s[:id]) %></td>
                   <td><%= s[:wins] %></td>
                   <td><%= s[:losses] %></td>
                   <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
@@ -145,7 +145,7 @@
             <tbody>
               <% standings("Africa").each do |t, s| %>
                 <tr>
-                  <td class="name"><%= t %></td>
+                  <td class="name"><%= link_to t, team_path(s[:id]) %></td>
                   <td><%= s[:wins] %></td>
                   <td><%= s[:losses] %></td>
                   <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
@@ -161,7 +161,7 @@
             <tbody>
               <% standings("Asia").each do |t, s| %>
                 <tr>
-                  <td class="name"><%= t %></td>
+                  <td class="name"><%= link_to t, team_path(s[:id]) %></td>
                   <td><%= s[:wins] %></td>
                   <td><%= s[:losses] %></td>
                   <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>
@@ -177,7 +177,7 @@
             <tbody>
               <% standings("Oceania").each do |t, s| %>
                 <tr>
-                  <td class="name"><%= t %></td>
+                  <td class="name"><%= link_to t, team_path(s[:id]) %></td>
                   <td><%= s[:wins] %></td>
                   <td><%= s[:losses] %></td>
                   <td><%= ("%.3f" % s[:win_pct]).sub(/^0/,'') %></td>

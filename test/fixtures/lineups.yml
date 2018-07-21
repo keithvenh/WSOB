@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team: 
+  one_pos: 
+  one_player: 
+  two_pos: 
+  two_player: 
+  three_pos: 
+  three_player: 
+  four_pos: 
+  four_player: 
+  five_pos: 
+  five_player: 
+  six_pos: 
+  six_player: 
+  seven_pos: 
+  seven_player: 
+  eight_pos: 
+  eight_player: 
+  nine_pos: 
+  nine_player: MyString
+
+two:
+  team: 
+  one_pos: 
+  one_player: 
+  two_pos: 
+  two_player: 
+  three_pos: 
+  three_player: 
+  four_pos: 
+  four_player: 
+  five_pos: 
+  five_player: 
+  six_pos: 
+  six_player: 
+  seven_pos: 
+  seven_player: 
+  eight_pos: 
+  eight_player: 
+  nine_pos: 
+  nine_player: MyString

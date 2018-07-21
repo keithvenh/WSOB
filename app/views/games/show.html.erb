@@ -1,7 +1,7 @@
 <div class="game-container">
   <div class="container">
     <div class="visitor">
-      <h3><%= @game.visitor.name %></h3>
+      <h3><%= link_to @game.visitor.name, team_path(@game.visitor) %></h3>
       <% vis_record = team_wins_losses(@game.visitor, @game.date) %>
       <p>(<%= vis_record[0] %>-<%= vis_record[1] %>)</p>
     </div>
@@ -71,7 +71,7 @@
     </div>
 
     <div class="home">
-      <h3><%= @game.home.name %></h3>
+      <h3><%= link_to @game.home.name, team_path(@game.home) %></h3>
       <% home_record = team_wins_losses(@game.home, @game.date) %>
       <p>(<%= home_record[0] %>-<%= home_record[1] %>)</p>
     </div>

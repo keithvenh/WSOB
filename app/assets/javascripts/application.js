@@ -143,6 +143,4 @@ jQuery(document).on('turbolinks:load', function() {
   jQuery("#leaders-hitting").click(function() {
     jQuery('#hitting-stats').css('display', 'block');
   });
-
-
 })

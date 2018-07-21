@@ -5,6 +5,7 @@ class CreateTeams < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :division
       t.string :conference
+      t.string :abbr
 
       t.timestamps
     end

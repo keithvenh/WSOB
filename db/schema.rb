@@ -10,27 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180720181918) do
+ActiveRecord::Schema.define(version: 20180721031907) do
 
   create_table "batting_stats", force: :cascade do |t|
     t.integer "game_id"
     t.integer "team_id"
     t.integer "player_id"
-    t.boolean "start"
+    t.boolean "start", default: true
     t.integer "order"
     t.integer "pos"
     t.integer "ab"
-    t.integer "r"
-    t.integer "h"
-    t.integer "rbi"
-    t.integer "so"
-    t.integer "bb"
-    t.integer "hbp"
-    t.integer "sac"
-    t.integer "sb"
-    t.integer "do"
-    t.integer "tr"
-    t.integer "hr"
+    t.integer "r", default: 0
+    t.integer "h", default: 0
+    t.integer "rbi", default: 0
+    t.integer "so", default: 0
+    t.integer "bb", default: 0
+    t.integer "hbp", default: 0
+    t.integer "sac", default: 0
+    t.integer "sb", default: 0
+    t.integer "do", default: 0
+    t.integer "tr", default: 0
+    t.integer "hr", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_batting_stats_on_game_id"
@@ -38,13 +38,29 @@ ActiveRecord::Schema.define(version: 20180720181918) do
     t.index ["team_id"], name: "index_batting_stats_on_team_id"
   end
 
+  create_table "depth_charts", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "pos"
+    t.integer "first_id"
+    t.integer "second_id"
+    t.integer "third_id"
+    t.integer "fourth_id"
+    t.integer "fifth_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fifth_id"], name: "index_depth_charts_on_fifth_id"
+    t.index ["first_id"], name: "index_depth_charts_on_first_id"
+    t.index ["fourth_id"], name: "index_depth_charts_on_fourth_id"
+    t.index ["second_id"], name: "index_depth_charts_on_second_id"
+    t.index ["team_id"], name: "index_depth_charts_on_team_id"
+    t.index ["third_id"], name: "index_depth_charts_on_third_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.date "date"
     t.integer "visitor_id"
     t.integer "home_id"
-    t.boolean "complete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "complete", default: false
     t.integer "vis_runs"
     t.integer "vis_hits"
     t.integer "vis_errors"
@@ -53,6 +69,8 @@ ActiveRecord::Schema.define(version: 20180720181918) do
     t.integer "home_errors"
     t.integer "winner_id"
     t.integer "loser_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["home_id"], name: "index_games_on_home_id"
     t.index ["loser_id"], name: "index_games_on_loser_id"
     t.index ["visitor_id"], name: "index_games_on_visitor_id"
@@ -61,12 +79,46 @@ ActiveRecord::Schema.define(version: 20180720181918) do
 
   create_table "innings", force: :cascade do |t|
     t.integer "game_id"
-    t.integer "vis_runs"
-    t.integer "home_runs"
+    t.integer "inning"
+    t.integer "vis_runs", default: 0
+    t.integer "home_runs", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "inning"
     t.index ["game_id"], name: "index_innings_on_game_id"
+  end
+
+  create_table "lineups", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "one_pos"
+    t.integer "one_player_id"
+    t.integer "two_pos"
+    t.integer "two_player_id"
+    t.integer "three_pos"
+    t.integer "three_player_id"
+    t.integer "four_pos"
+    t.integer "four_player_id"
+    t.integer "five_pos"
+    t.integer "five_player_id"
+    t.integer "six_pos"
+    t.integer "six_player_id"
+    t.integer "seven_pos"
+    t.integer "seven_player_id"
+    t.integer "eight_pos"
+    t.integer "eight_player_id"
+    t.integer "nine_pos"
+    t.integer "nine_player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["eight_player_id"], name: "index_lineups_on_eight_player_id"
+    t.index ["five_player_id"], name: "index_lineups_on_five_player_id"
+    t.index ["four_player_id"], name: "index_lineups_on_four_player_id"
+    t.index ["nine_player_id"], name: "index_lineups_on_nine_player_id"
+    t.index ["one_player_id"], name: "index_lineups_on_one_player_id"
+    t.index ["seven_player_id"], name: "index_lineups_on_seven_player_id"
+    t.index ["six_player_id"], name: "index_lineups_on_six_player_id"
+    t.index ["team_id"], name: "index_lineups_on_team_id"
+    t.index ["three_player_id"], name: "index_lineups_on_three_player_id"
+    t.index ["two_player_id"], name: "index_lineups_on_two_player_id"
   end
 
   create_table "news_stories", force: :cascade do |t|
@@ -81,26 +133,26 @@ ActiveRecord::Schema.define(version: 20180720181918) do
     t.integer "game_id"
     t.integer "team_id"
     t.integer "player_id"
-    t.integer "outs"
-    t.integer "h"
-    t.integer "r"
-    t.integer "er"
-    t.integer "k"
-    t.integer "bb"
-    t.integer "hbp"
-    t.integer "wp"
-    t.integer "do"
-    t.integer "tr"
-    t.integer "hr"
-    t.integer "bf"
-    t.boolean "w"
-    t.boolean "l"
-    t.boolean "s"
-    t.boolean "bs"
-    t.boolean "hld"
+    t.boolean "start", default: false
+    t.integer "outs", null: false
+    t.integer "h", default: 0
+    t.integer "r", default: 0
+    t.integer "er", default: 0
+    t.integer "k", default: 0
+    t.integer "bb", default: 0
+    t.integer "hbp", default: 0
+    t.integer "wp", default: 0
+    t.integer "do", default: 0
+    t.integer "tr", default: 0
+    t.integer "hr", default: 0
+    t.integer "bf", default: 0
+    t.boolean "w", default: false
+    t.boolean "l", default: false
+    t.boolean "s", default: false
+    t.boolean "bs", default: false
+    t.boolean "hld", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "start"
     t.index ["game_id"], name: "index_pitching_stats_on_game_id"
     t.index ["player_id"], name: "index_pitching_stats_on_player_id"
     t.index ["team_id"], name: "index_pitching_stats_on_team_id"
@@ -120,6 +172,7 @@ ActiveRecord::Schema.define(version: 20180720181918) do
     t.string "city"
     t.string "division"
     t.string "conference"
+    t.string "abbr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
