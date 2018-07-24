@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180721031907) do
+ActiveRecord::Schema.define(version: 20180721044615) do
 
   create_table "batting_stats", force: :cascade do |t|
     t.integer "game_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20180721031907) do
     t.date "date"
     t.integer "visitor_id"
     t.integer "home_id"
-    t.boolean "complete", default: false
+    t.boolean "complete"
     t.integer "vis_runs"
     t.integer "vis_hits"
     t.integer "vis_errors"
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20180721031907) do
   create_table "innings", force: :cascade do |t|
     t.integer "game_id"
     t.integer "inning"
-    t.integer "vis_runs", default: 0
-    t.integer "home_runs", default: 0
+    t.integer "vis_runs"
+    t.integer "home_runs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_innings_on_game_id"
@@ -121,14 +121,6 @@ ActiveRecord::Schema.define(version: 20180721031907) do
     t.index ["two_player_id"], name: "index_lineups_on_two_player_id"
   end
 
-  create_table "news_stories", force: :cascade do |t|
-    t.integer "game_id"
-    t.text "story"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_news_stories_on_game_id"
-  end
-
   create_table "pitching_stats", force: :cascade do |t|
     t.integer "game_id"
     t.integer "team_id"
@@ -162,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180721031907) do
     t.string "first_name"
     t.string "last_name"
     t.integer "team_id"
+    t.string "deck"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_players_on_team_id"

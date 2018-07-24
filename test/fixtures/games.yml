@@ -1,19 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  game_date: 2018-07-16
-  visitor_id: MyString
-  int: MyString
-  home_id: MyString
-  int: MyString
-  complete: MyString
-  bool: MyString
+  date: 2018-07-20
+  visitor: one
+  home: one
+  complete: false
+  vis_runs: 1
+  vis_hits: 1
+  vis_errors: 1
+  home_runs: 1
+  home_hits: 1
+  home_errors: 1
+  winner: one
+  loser: one
 
 two:
-  game_date: 2018-07-16
-  visitor_id: MyString
-  int: MyString
-  home_id: MyString
-  int: MyString
-  complete: MyString
-  bool: MyString
+  date: 2018-07-20
+  visitor: two
+  home: two
+  complete: false
+  vis_runs: 1
+  vis_hits: 1
+  vis_errors: 1
+  home_runs: 1
+  home_hits: 1
+  home_errors: 1
+  winner: two
+  loser: two

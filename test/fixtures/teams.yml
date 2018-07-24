@@ -5,9 +5,11 @@ one:
   city: MyString
   division: MyString
   conference: MyString
+  abbr: MyString
 
 two:
   name: MyString
   city: MyString
   division: MyString
   conference: MyString
+  abbr: MyString

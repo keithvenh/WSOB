@@ -2,10 +2,12 @@
 
 one:
   game: one
+  inning: 1
   vis_runs: 1
   home_runs: 1
 
 two:
   game: two
+  inning: 1
   vis_runs: 1
   home_runs: 1

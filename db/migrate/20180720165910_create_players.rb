@@ -4,6 +4,7 @@ class CreatePlayers < ActiveRecord::Migration[5.1]
       t.string :first_name
       t.string :last_name
       t.references :team, foreign_key: true
+      t.string :deck
 
       t.timestamps
     end

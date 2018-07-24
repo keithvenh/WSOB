@@ -1,0 +1,32 @@
+id,name,city,div,conf,abbr
+1,Argentina,Buenos Aires,South America,West,ARG
+2,Australia,Sydney,Oceania,East,AUS
+3,Brazil,Rio de Janeiro,South America,West,BRA
+4,Canada,Vancouver,North America,West,CAN
+5,China,Shanghai,Asia,East,CHI
+6,Colombia,Bogota,South America,West,COL
+7,Cuba,Havana,North America,West,CUB
+8,Dominican Republic,Santo Domingo,North America,West,DR
+9,Egypt,Cairo,Africa,East,EGY
+10,Ethiopia,Addis Ababa,Africa,East,ETH
+11,Fiji,Suva,Oceania,East,FIJ
+12,France,Paris,Europe,West,FRA
+13,Germany,Munich,Europe,West,GER
+14,India,Calcutta,Asia,East,IND
+15,Italy,Rome,Europe,West,ITA
+16,Japan,Tokyo,Asia,East,JAP
+17,Kenya,Nairobi,Africa,East,KEN
+18,Mexico,Mexico City,North America,West,MEX
+19,Morocco,Casablanca,Africa,East,MOR
+20,New Zealand,Wellington,Oceania,East,NZ
+21,Papua New Guinea,Port Moresby,Oceania,East,PNG
+22,Peru,Lima,South America,West,PER
+23,Russia,Moscow,Asia,East,RUS
+24,Samoa,Apia,Oceania,East,SAM
+25,South Africa,Cape Town,Africa,East,SA
+26,Spain,Barcelona,Europe,West,SPA
+27,Thailand,Bangkok,Asia,East,THA
+28,United Kingdom,London,Europe,West,UK
+29,United States,New York City,North America,West,US
+30,Venezuela,Caracas,South America,West,VEN
+99,Free Agent,None,None,None,FA
