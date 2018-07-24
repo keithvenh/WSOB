@@ -60,14 +60,95 @@ hof_deck.each do |row|
   )
 end
 
-ninety_eight_deck_text = File.read(Rails.root.join('lib', 'seeds', '1998_roster.csv'))
+ninety_eight_deck_text = File.read(Rails.root.join('lib', 'seeds', '1998_deck.csv'))
 ninety_eight_deck = CSV.parse(ninety_eight_deck_text, :headers => true, :encoding => 'ISO-8859-1')
 
 ninety_eight_deck.each do |row|
   Player.create!(
+    id: row['id'],
     first_name: row['first'],
     last_name: row['last'],
     team_id: row['team'],
     deck: row['deck']
+  )
+end
+
+hof_hitting_card_stats_text = File.read(Rails.root.join('lib', 'seeds', 'hof_hitting_card_stats.csv'))
+hof_hitting_card_stats = CSV.parse(hof_hitting_card_stats_text, :headers => true, :encoding => 'ISO-8859-1')
+
+hof_hitting_card_stats.each do |row|
+  HittingCardStat.create!(
+    player_id: row['player_id'],
+    avg: row['avg'],
+    ab: row['ab'],
+    do: row['do'],
+    tr: row['tr'],
+    hr: row['hr'],
+    rbi: row['rbi'],
+    bb: row['bb'],
+    so: row['so'],
+    sb: row['sb'],
+    cs: row['cs'],
+    slg: row['slg'],
+    obp: row['obp']
+  )
+end
+
+ninety_eight_hitting_card_stats_text = File.read(Rails.root.join('lib', 'seeds', '1998_hitting_card_stats.csv'))
+ninety_eight_hitting_card_stats = CSV.parse(ninety_eight_hitting_card_stats_text, :headers => true, :encoding => 'ISO-8859-1')
+
+ninety_eight_hitting_card_stats.each do |row|
+  HittingCardStat.create!(
+    player_id: row['player_id'],
+    avg: row['avg'],
+    ab: row['ab'],
+    do: row['do'],
+    tr: row['tr'],
+    hr: row['hr'],
+    rbi: row['rbi'],
+    bb: row['bb'],
+    so: row['so'],
+    sb: row['sb'],
+    cs: row['cs'],
+    slg: row['slg'],
+    obp: row['obp']
+  )
+end
+
+hof_pitching_card_stats_text = File.read(Rails.root.join('lib', 'seeds', 'hof_pitching_card_stats.csv'))
+hof_pitching_card_stats = CSV.parse(hof_pitching_card_stats_text, :headers => true, :encoding => 'ISO-8859-1')
+
+hof_pitching_card_stats.each do |row|
+  PitchingCardStat.create!(
+    player_id: row['player_id'],
+    w: row['w'],
+    l: row['l'],
+    era: row['era'],
+    starts: row['starts'],
+    sv: row['sv'],
+    ip: row['ip'],
+    hits_allowed: row['hits'],
+    bb: row['bb'],
+    so: row['so'],
+    hr_allowed: row['hr'],
+  )
+end
+
+ninety_eight_pitching_card_stats_text = File.read(Rails.root.join('lib', 'seeds', '1998_pitching_card_stats.csv'))
+ninety_eight_pitching_card_stats = CSV.parse(ninety_eight_pitching_card_stats_text, :headers => true, :encoding => 'ISO-8859-1')
+
+ninety_eight_pitching_card_stats.each do |row|
+  PitchingCardStat.create!(
+    player_id: row['player_id'],
+    w: row['w'],
+    l: row['l'],
+    era: row['era'],
+    starts: row['starts'],
+    sv: row['sv'],
+    ip: row['ip'],
+    hits_allowed: row['hits'],
+    bb: row['bb'],
+    so: row['so'],
+    hr_allowed: row['hr'],
   )
 end

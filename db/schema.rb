@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180721044615) do
+ActiveRecord::Schema.define(version: 20180724175201) do
 
   create_table "batting_stats", force: :cascade do |t|
     t.integer "game_id"
@@ -77,6 +77,25 @@ ActiveRecord::Schema.define(version: 20180721044615) do
     t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
+  create_table "hitting_card_stats", force: :cascade do |t|
+    t.integer "player_id"
+    t.float "avg"
+    t.integer "ab"
+    t.integer "do"
+    t.integer "tr"
+    t.integer "hr"
+    t.integer "rbi"
+    t.integer "bb"
+    t.integer "so"
+    t.integer "sb"
+    t.integer "cs"
+    t.float "slg"
+    t.float "obp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_hitting_card_stats_on_player_id"
+  end
+
   create_table "innings", force: :cascade do |t|
     t.integer "game_id"
     t.integer "inning"
@@ -119,6 +138,23 @@ ActiveRecord::Schema.define(version: 20180721044615) do
     t.index ["team_id"], name: "index_lineups_on_team_id"
     t.index ["three_player_id"], name: "index_lineups_on_three_player_id"
     t.index ["two_player_id"], name: "index_lineups_on_two_player_id"
+  end
+
+  create_table "pitching_card_stats", force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "w"
+    t.integer "l"
+    t.float "era"
+    t.integer "starts"
+    t.integer "sv"
+    t.integer "ip"
+    t.integer "hits_allowed"
+    t.integer "bb"
+    t.integer "so"
+    t.integer "hr_allowed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_pitching_card_stats_on_player_id"
   end
 
   create_table "pitching_stats", force: :cascade do |t|

@@ -1,4 +1,4 @@
-id,first,last,team,deck_id
+id,first,last,team,deck
 1001,Hank,Aaron,28,Hall Of Fame
 1002,Pete,Alexander,27,Hall Of Fame
 1003,Robbie,Alomar,4,Hall Of Fame
@@ -218,7 +218,7 @@ id,first,last,team,deck_id
 1217,Dazzy,Vance,4,Hall Of Fame
 1218,Arky,Vaughan,16,Hall Of Fame
 1219,Rube,Waddell,14,Hall Of Fame
-1220,Honnus,Wagner,0,Hall Of Fame
+1220,Honus,Wagner,29,Hall Of Fame
 1221,Bobby,Wallace,10,Hall Of Fame
 1222,Ed,Walsh,12,Hall Of Fame
 1223,Lloyd,Waner,15,Hall Of Fame

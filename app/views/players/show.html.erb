@@ -1,0 +1,77 @@
+<% h = @player.hitting_card_stats.first %>
+<% p = @player.pitching_card_stats.first %>
+<div style="padding-top: 75px;">
+<h3><%= @player.first_name %> <%= @player.last_name %></h3>
+<p><%= @player.team.name %></p>
+<% if h %>
+  <table style="text-align:center">
+    <tr>
+      <th colspan="13">
+    </tr>
+    <tr> 
+      <th>Year</th>
+      <th>AVG</th>
+      <th>AB</th>
+      <th>2B</th>
+      <th>3B</th>
+      <th>HR</th>
+      <th>RBI</th>
+      <th>BB</th>
+      <th>K</th>
+      <th>SB</th>
+      <th>CS</th>
+      <th>SLG</th>
+      <th>OBP</th>
+    </tr>
+    <tr>
+      <td><%= @player.deck %></td>
+      <td><%= h.avg %></td>
+      <td><%= h.ab %></td>
+      <td><%= h.do %></td>
+      <td><%= h.tr %></td>
+      <td><%= h.hr %></td>
+      <td><%= h.rbi %></td>
+      <td><%= h.bb %></td>
+      <td><%= h.so %></td>
+      <td><%= h.sb %></td>
+      <td><%= h.cs %></td>
+      <td><%= h.slg %></td>
+      <td><%= h.obp %></td>
+    </tr>
+  </table>
+<% end %>
+
+<% if p %>
+  <table style="text-align:center">
+    <tr>
+      <th colspan="13">
+    </tr>
+    <tr> 
+      <th>Year</th>
+      <th>W</th>
+      <th>L</th>
+      <th>ERA</th>
+      <th>Starts</th>
+      <th>SV</th>
+      <th>IP</th>
+      <th>Hits Allowed</th>
+      <th>BB</th>
+      <th>K</th>
+      <th>Homeruns Allowed</th>
+    </tr>
+    <tr>
+      <td><%= @player.deck %></td>
+      <td><%= p.w %></td>
+      <td><%= p.l %></td>
+      <td><%= p.era %></td>
+      <td><%= p.starts %></td>
+      <td><%= p.sv %></td>
+      <td><%= p.ip %></td>
+      <td><%= p.hits_allowed %></td>
+      <td><%= p.bb %></td>
+      <td><%= p.so %></td>
+      <td><%= p.hr_allowed %></td>
+    </tr>
+  </table>
+<% end %>
+</div>

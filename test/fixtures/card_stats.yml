@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: one
+  avg: 1.5
+  ab: 
+  do: 
+  tr: 
+  hr: 
+  rbi: 
+  bb: 
+  so: 
+  sb: 
+  cs: 
+  slg: 1.5
+  obp: 1.5
+
+two:
+  player: two
+  avg: 1.5
+  ab: 
+  do: 
+  tr: 
+  hr: 
+  rbi: 
+  bb: 
+  so: 
+  sb: 
+  cs: 
+  slg: 1.5
+  obp: 1.5
