@@ -1,5 +1,5 @@
 <div class="game-container">
-  <div class="container">
+  <div class="wrapper">
     <div class="visitor">
       <h3><%= link_to @game.visitor.name, team_path(@game.visitor) %></h3>
       <% vis_record = team_wins_losses(@game.visitor, @game.date) %>
@@ -9,7 +9,7 @@
     <div class="game-info">
       <% if @game.complete? %>
         <h2><%= @game.winner.name %> <%= @game.winner == @game.home ? @game.home_runs : @game.vis_runs %>, <%= @game.loser.name %> <%= @game.loser == @game.home ? @game.home_runs : @game.vis_runs %></h2>
-        <p><%= @game.date.strftime('%A, %B %-d, %Y') %>
+        <p><%= @game.date.strftime('%A, %B %-d, %Y') %></p>
         <table>
           <thead>
             <tr>
@@ -25,7 +25,7 @@
           </thead>
           <tbody>
             <tr>
-              <td class="team-name"><%= @game.visitor.name[0..2] %></td>
+              <td class="team-name"><%= @game.visitor.abbr %></td>
               <% @innings.each do |i| %>
                 <td><%= i.vis_runs %></td>
               <% end %>
@@ -35,7 +35,7 @@
               <td class="totals"><%= @game.vis_errors %></td>
             </tr>
             <tr>
-              <td class="team-name"><%= @game.home.name[0..2] %></td>
+              <td class="team-name"><%= @game.home.abbr %></td>
               <% @innings.each do |i| %>
                 <td><%= i.home_runs %></td>
               <% end %>
@@ -80,7 +80,7 @@
       <p>(<%= home_record[0] %>-<%= home_record[1] %>)</p>
     </div>
   </div>
-  <div class="container">
+  <div class="wrapper">
     <% if @game.complete? %>
       <div class="team-info visitor-info">
         <table>
@@ -99,9 +99,11 @@
           </thead>
           <tbody>
             <% vis_stats = BattingStat.where(game_id: @game.id, team_id: @game.visitor.id) %>
+              <% vis_game_stats = {ab: vis_stats.sum(:ab), r: vis_stats.sum(:r), h: vis_stats.sum(:h), rbi: vis_stats.sum(:rbi), so: vis_stats.sum(:so), bb: vis_stats.sum(:bb), sb: vis_stats.sum(:sb), xbh: (vis_stats.sum(:do) + vis_stats.sum(:tr) + vis_stats.sum(:hr)) } %>
             <% vis_stats.each do |bs| %>
-              <tr>
-                <td class="player-name"><span class="order"><%= bs.order %></span> <%= bs.player.last_name %> <em class="pos"><%= pos_to_string(bs.pos) %></em></td>
+              <tr class="<%= num_to_string(bs.order) %>">
+                <% bs.start? ? sub = "" : sub = "sub" %>
+                <td class="player-name <%= sub %>"><% if bs.start? %><span class="order"><%= bs.order %></span><% end %> <%= bs.player.last_name %> <em class="pos"><%= pos_to_string(bs.pos) %></em></td>
                 <td><%= bs.ab %></td>
                 <td><%= bs.r %></td>
                 <td><%= bs.h %></td>
@@ -113,6 +115,128 @@
               </tr>
             <% end %>
           </tbody>
+          <tfoot>
+            <tr class="totals">
+              <td class="player-name">TOTALS</td>
+              <td><%= vis_game_stats[:ab] %></td>
+              <td><%= vis_game_stats[:r] %></td>
+              <td><%= vis_game_stats[:h] %></td>
+              <td><%= vis_game_stats[:rbi] %></td>
+              <td><%= vis_game_stats[:so] %></td>
+              <td><%= vis_game_stats[:bb] %></td>
+              <td><%= vis_game_stats[:sb] %></td>
+              <td><%= vis_game_stats[:xbh] %></td>
+            </tr>
+
+          </tfoot>
+        </table>
+        <div class="big-plays">
+          <h6 class="stat-category">BATTING</h6>
+          <% vis_big_plays = {do: vis_stats.where('do > ?', 0), tr: vis_stats.where('tr > ?', 0), hr: vis_stats.where('hr > ?', 0), rbi: vis_stats.where('rbi > ?', 0), sb: vis_stats.where('sb > ?', 0) } %>
+          <% if vis_stats.sum(:do) > 0 %>
+            <p class="doubles"><b>2B:</b> 
+
+            <% vis_big_plays[:do].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.do %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:do) %>)<%= p == vis_big_plays[:do].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if vis_stats.sum(:tr) > 0 %>
+            <p class="doubles"><b>3B:</b> 
+
+            <% vis_big_plays[:tr].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.tr %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:tr) %>)<%= p == vis_big_plays[:tr].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if vis_stats.sum(:hr) > 0 %>
+            <p class="doubles"><b>HR:</b> 
+
+            <% vis_big_plays[:hr].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.hr %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:hr) %>)<%= p == vis_big_plays[:hr].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if vis_stats.sum(:rbi) > 0 %>
+            <p class="doubles"><b>RBI:</b> 
+
+            <% vis_big_plays[:rbi].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.rbi %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:rbi) %>)<%= p == vis_big_plays[:rbi].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if vis_stats.sum(:sb) > 0 %>
+            <p class="doubles"><b>SB:</b> 
+
+            <% vis_big_plays[:sb].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.sb %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:sb) %>)<%= p == vis_big_plays[:sb].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+
+
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th><%= @game.visitor.name %> Pitchers</th>
+              <th>IP</th>
+              <th>H</th>
+              <th>R</th>
+              <th>ER</th>
+              <th>BB</th>
+              <th>SO</th>
+              <th>HR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% vis_stats = PitchingStat.where(game_id: @game.id, team_id: @game.visitor.id) %>
+            <% vis_game_stats = {outs: outs_to_ip(vis_stats.sum(:outs)), r: vis_stats.sum(:r), h: vis_stats.sum(:h), er: vis_stats.sum(:er), so: vis_stats.sum(:k), bb: vis_stats.sum(:bb), hr: vis_stats.sum(:hr) } %>
+            <% vis_stats.each do |ps| %>
+              <tr>
+                <td class="player-name"><%= ps.player.last_name %>
+                  <% if winner.player == ps.player%>
+                    (W, <%= w_rec[0] %>-<%= w_rec[1] %>)
+                  <% elsif loser.player == ps.player %>
+                    (L, <%= l_rec[0] %>-<%= l_rec[1] %>)
+                  <% elsif save && save.player == ps.player %>
+                    (S, <%= s_rec %>)
+                  <% end %>
+                </td>
+                <td><%= outs_to_ip(ps.outs) %></td>
+                <td><%= ps.h %></td>
+                <td><%= ps.r %></td>
+                <td><%= ps.er %></td>
+                <td><%= ps.k %></td>
+                <td><%= ps.bb %></td>
+                <td><%= ps.hr %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr class="totals">
+              <td class="player-name">TOTALS</td>
+              <td><%= vis_game_stats[:outs] %></td>
+              <td><%= vis_game_stats[:h] %></td>
+              <td><%= vis_game_stats[:r] %></td>
+              <td><%= vis_game_stats[:er] %></td>
+              <td><%= vis_game_stats[:bb] %></td>
+              <td><%= vis_game_stats[:so] %></td>
+              <td><%= vis_game_stats[:hr] %></td>
+            </tr>
+
+          </tfoot>
         </table>
       </div>
 
@@ -133,9 +257,11 @@
           </thead>
           <tbody>
             <% home_stats = BattingStat.where(game_id: @game.id, team_id: @game.home.id) %>
+            <% home_game_stats = {ab: home_stats.sum(:ab), r: home_stats.sum(:r), h: home_stats.sum(:h), rbi: home_stats.sum(:rbi), so: home_stats.sum(:so), bb: home_stats.sum(:bb), sb: home_stats.sum(:sb), xbh: (home_stats.sum(:do) + home_stats.sum(:tr) + home_stats.sum(:hr)) } %>
             <% home_stats.each do |bs| %>
-              <tr>
-                <td class="player-name"><span class="order"><%= bs.order %></span> <%= bs.player.last_name %> <em class="pos"><%= pos_to_string(bs.pos) %></em></td>
+              <tr class="<%= num_to_string(bs.order) %>">
+                <% bs.start? ? sub = "" : sub = "sub" %>
+                <td class="player-name <%= sub %>"><% if bs.start? %><span class="order"><%= bs.order %></span><% end %> <%= bs.player.last_name %> <em class="pos"><%= pos_to_string(bs.pos) %></em></td>
                 <td><%= bs.ab %></td>
                 <td><%= bs.r %></td>
                 <td><%= bs.h %></td>
@@ -147,9 +273,131 @@
               </tr>
             <% end %>
           </tbody>
-        </table>
-      </div>
+          <tfoot>
+            <tr class="totals">
+              <td class="player-name">TOTALS</td>
+              <td><%= home_game_stats[:ab] %></td>
+              <td><%= home_game_stats[:r] %></td>
+              <td><%= home_game_stats[:h] %></td>
+              <td><%= home_game_stats[:rbi] %></td>
+              <td><%= home_game_stats[:so] %></td>
+              <td><%= home_game_stats[:bb] %></td>
+              <td><%= home_game_stats[:sb] %></td>
+              <td><%= home_game_stats[:xbh] %></td>
+            </tr>
 
+          </tfoot>
+        </table>
+
+        <div class="big-plays">
+          <h6 class="stat-category">BATTING</h6>
+          <% home_big_plays = {do: home_stats.where('do > ?', 0), tr: home_stats.where('tr > ?', 0), hr: home_stats.where('hr > ?', 0), rbi: home_stats.where('rbi > ?', 0), sb: home_stats.where('sb > ?', 0) } %>
+          <% if home_stats.sum(:do) > 0 %>
+            <p class="doubles"><b>2B:</b> 
+
+            <% home_big_plays[:do].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.do %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:do) %>)<%= p == home_big_plays[:do].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if home_stats.sum(:tr) > 0 %>
+            <p class="doubles"><b>3B:</b> 
+
+            <% home_big_plays[:tr].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.tr %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:tr) %>)<%= p == home_big_plays[:tr].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if home_stats.sum(:hr) > 0 %>
+            <p class="doubles"><b>HR:</b> 
+
+            <% home_big_plays[:hr].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.hr %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:hr) %>)<%= p == home_big_plays[:hr].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if home_stats.sum(:rbi) > 0 %>
+            <p class="doubles"><b>RBI:</b> 
+
+            <% home_big_plays[:rbi].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.rbi %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:rbi) %>)<%= p == home_big_plays[:rbi].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+          <% if home_stats.sum(:sb) > 0 %>
+            <p class="doubles"><b>SB:</b> 
+
+            <% home_big_plays[:sb].each do |p| %>
+              <span><%= p.player.last_name %></span> <span><%= p.sb %></span> <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', p.player.id, @game.id).sum(:sb) %>)<%= p == home_big_plays[:sb].last ? "." : ";" %></span>
+            <% end %>
+
+            </p>
+          <% end %>
+
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th><%= @game.home.name %> Pitchers</th>
+              <th>IP</th>
+              <th>H</th>
+              <th>R</th>
+              <th>ER</th>
+              <th>BB</th>
+              <th>SO</th>
+              <th>HR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% home_stats = PitchingStat.where(game_id: @game.id, team_id: @game.home.id) %>
+            <% home_game_stats = {outs: outs_to_ip(home_stats.sum(:outs)), r: home_stats.sum(:r), h: home_stats.sum(:h), er: home_stats.sum(:er), so: home_stats.sum(:k), bb: home_stats.sum(:bb), hr: home_stats.sum(:hr) } %>
+            <% home_stats.each do |ps| %>
+              <tr>
+                <td class="player-name"><%= ps.player.last_name %>
+                  <% if winner.player == ps.player%>
+                    (W, <%= w_rec[0] %>-<%= w_rec[1] %>)
+                  <% elsif loser.player == ps.player %>
+                    (L, <%= l_rec[0] %>-<%= l_rec[1] %>)
+                  <% elsif save && save.player == ps.player %>
+                    (S, <%= s_rec %>)
+                  <% end %>
+                </td>
+                <td><%= outs_to_ip(ps.outs) %></td>
+                <td><%= ps.h %></td>
+                <td><%= ps.r %></td>
+                <td><%= ps.er %></td>
+                <td><%= ps.k %></td>
+                <td><%= ps.bb %></td>
+                <td><%= ps.hr %></td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr class="totals">
+              <td class="player-name">TOTALS</td>
+              <td><%= home_game_stats[:outs] %></td>
+              <td><%= home_game_stats[:h] %></td>
+              <td><%= home_game_stats[:r] %></td>
+              <td><%= home_game_stats[:er] %></td>
+              <td><%= home_game_stats[:bb] %></td>
+              <td><%= home_game_stats[:so] %></td>
+              <td><%= home_game_stats[:hr] %></td>
+            </tr>
+
+          </tfoot>
+        </table>
+        
+      </div>
+      
 
     <% else %>
     <div class="team-info visitor-info">
@@ -375,6 +623,18 @@
     </div>
 
     <% end %>
+    
   </div>
+
+  <div class="game-details">
+    <div class="game-summary">
+      <% starters = { home: PitchingStat.where(game: @game, team: @game.home).first, vis: PitchingStat.where(game: @game, team: @game.visitor).first } %>
+      <p><b>Game Scores</b>: <%= starters[:vis].player.last_name %> <%= calc_game_score(starters[:vis]) %>; <%= starters[:home].player.last_name %> <%= calc_game_score(starters[:home]) %></p>
+      <p><b>WP</b>: <%= winner.player.last_name %></p>
+      <p><b>Venue</b>: <%= @game.home.city %>, <%= @game.home.name %></p>
+      <p><b><%= @game.date.strftime('%B %-d, %Y') %></p>
+    </div>
+  </div>
+  
 </div>
   

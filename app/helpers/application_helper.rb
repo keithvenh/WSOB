@@ -136,4 +136,37 @@ module ApplicationHelper
       return "PR"
     end
   end
+
+  def num_to_string(num)
+    case num
+    when 2
+      return 'two'
+    when 4
+      return 'four'
+    when 6
+      return 'six'
+    when 8
+      return 'eight'
+    end
+  end
+
+  def outs_to_ip(outs)
+    full = outs/3
+    partial = outs % 3
+
+    return "#{full}.#{partial}"
+  end
+
+  def calc_game_score(game)
+    score = 40
+    score += (game.outs * 2)
+    score += game.k
+    score -= (game.h * 2)
+    score -= (game.bb * 2)
+    score -= (game.hbp * 2)
+    score -= (game.r * 3)
+    score -= (game.hr * 6)
+
+    return score
+  end
 end
