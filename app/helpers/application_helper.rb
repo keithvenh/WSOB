@@ -1,82 +1,30 @@
 module ApplicationHelper
 
-  def max_at_bats
-    twenty_sided = 1 + rand(20)
+# CALCULATE WINS FOR A GIVEN ENTITY
+  def get_wins(entity, game)
 
-    at_bats = 600
-
-    case twenty_sided
-    when 1
-      at_bats = 599
-    when 2..3
-      at_bats = 574
-    when 4..6
-      at_bats = 549
-    when 7..8
-      at_bats = 524
-    when 9..10
-      at_bats = 499
-    when 11..13
-      at_bats = 474
-    when 14..15
-      at_bats = 449
-    when 16..18
-      at_bats = 424
-    when 19
-      at_bats = 399
-    when 20
-      at_bats = 374
+    if entity.class == Team
+      wins = Game.where("date <= ? and winner_id = ?", game.date, entity.id).count
+    elsif entity.class == Player
+      wins = PitchingStat.where("game_id <= ? and player_id = ? and w = ?", game.id, entity.id, true).count
     end
 
-    return at_bats
-  end
-
-  
-  def players_to_rest
-    six_sided = 1 + rand(6)
-    positions = {"C" => "No Rest", "1B" => "No Rest", "2B" => "No Rest", "3B" => "No Rest", "SS" => "No Rest", "LF" => "No Rest", "CF" => "No Rest", "RF" => "No Rest", "DH" => "No Rest"}
-
-    case six_sided
-    when 1
-      positions["CF"] = max_at_bats
-      positions["3B"] = max_at_bats
-      positions["DH"] = max_at_bats
-    when 2
-      positions["SS"] = max_at_bats
-      positions["RF"] = max_at_bats
-      positions["1B"] = max_at_bats
-    when 3
-      positions["2B"] = max_at_bats
-      positions["C"] = max_at_bats
-      positions["LF"] = max_at_bats
-    when 4
-      positions["SS"] = max_at_bats
-      positions["LF"] = max_at_bats
-      positions["1B"] = max_at_bats
-    when 5
-      positions["2B"] = max_at_bats
-      positions["RF"] = max_at_bats
-      positions["DH"] = max_at_bats
-    when 6
-      positions["CF"] = max_at_bats
-      positions["C"] = max_at_bats
-      positions["3B"] = max_at_bats
-    end
-
-    return positions
-
+    return wins
 
   end
 
-  def team_wins_losses(team, date)
+#CALCULATE LOSSES FOR A GIVEN ENTITY
 
-    games = Game.where("date <= ?", date)
+  def get_losses(entity, game)
 
-    wins = games.where(winner: team.id).count
+    if entity.class == Team
+      losses = Game.where("date <= ? and loser_id = ?", game.date, entity.id).count
+    elsif
+      losses = PitchingStat.where("game_id <= ? and player_id = ? and l = ?", game.id, entity.id, true).count
+    end
 
-    losses = games.where(loser: team.id).count
+    return losses
 
-    return [wins, losses]
   end
 
   def pitcher_wins_losses(player, game)
@@ -106,6 +54,10 @@ module ApplicationHelper
 
 
     
+  end
+
+  def first_dot_last(p)
+    return "#{p.first_name[0]}. #{p.last_name}"
   end
 
   def pos_to_string(pos)
@@ -168,5 +120,72 @@ module ApplicationHelper
     score -= (game.hr * 6)
 
     return score
+  end
+
+  def max_at_bats
+    twenty_sided = 1 + rand(20)
+
+    at_bats = 600
+
+    case twenty_sided
+    when 1
+      at_bats = 599
+    when 2..3
+      at_bats = 574
+    when 4..6
+      at_bats = 549
+    when 7..8
+      at_bats = 524
+    when 9..10
+      at_bats = 499
+    when 11..13
+      at_bats = 474
+    when 14..15
+      at_bats = 449
+    when 16..18
+      at_bats = 424
+    when 19
+      at_bats = 399
+    when 20
+      at_bats = 374
+    end
+
+    return at_bats
+  end
+
+  def players_to_rest
+    six_sided = 1 + rand(6)
+    positions = {"C" => "No Rest", "1B" => "No Rest", "2B" => "No Rest", "3B" => "No Rest", "SS" => "No Rest", "LF" => "No Rest", "CF" => "No Rest", "RF" => "No Rest", "DH" => "No Rest"}
+
+    case six_sided
+    when 1
+      positions["CF"] = max_at_bats
+      positions["3B"] = max_at_bats
+      positions["DH"] = max_at_bats
+    when 2
+      positions["SS"] = max_at_bats
+      positions["RF"] = max_at_bats
+      positions["1B"] = max_at_bats
+    when 3
+      positions["2B"] = max_at_bats
+      positions["C"] = max_at_bats
+      positions["LF"] = max_at_bats
+    when 4
+      positions["SS"] = max_at_bats
+      positions["LF"] = max_at_bats
+      positions["1B"] = max_at_bats
+    when 5
+      positions["2B"] = max_at_bats
+      positions["RF"] = max_at_bats
+      positions["DH"] = max_at_bats
+    when 6
+      positions["CF"] = max_at_bats
+      positions["C"] = max_at_bats
+      positions["3B"] = max_at_bats
+    end
+
+    return positions
+
+
   end
 end

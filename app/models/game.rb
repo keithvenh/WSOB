@@ -5,4 +5,6 @@ class Game < ApplicationRecord
   belongs_to :loser, :class_name => "Team", optional: true
 
   has_many :innings
+  has_many :pitching_stats
+  has_many :batting_stats
 end

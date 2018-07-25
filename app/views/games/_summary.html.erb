@@ -1,0 +1,12 @@
+<% if game.complete? %>
+
+  <h2><%= game.winner.name %> <%= winner[:runs] %>, <%= game.loser.name %> <%= loser[:runs] %></h2>
+  <p><%= game.date.strftime("%B %-d, %Y") %></p>
+
+  <%= render 'inning_detail', {game: game, pitchers: pitchers} %>
+
+<% else %>
+
+  <%= render 'game_preview', {game: game} %>
+
+<% end %>

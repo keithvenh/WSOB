@@ -1,204 +1,198 @@
-.game-container {
-  padding-top: 100px;
-  background: #000;
+.wrapper {
+  background: #777;
   min-height: 100vh;
-  .wrapper {
-    background: #fffdfb;
-    text-align: center;
-    display: flex;
-    margin: 0 auto;
-    padding: 0;
-    width: 90vw;
-    padding-top: 50px;
-  }
-  .visitor,
-  .home {
-    flex: 1 1 30%;
-    color: #333;
-    h3 {
-      font-weight: 200;
-      text-transform: uppercase;
-      font-size: 3em;
-      margin: 0;
-      padding: 0;
-      a {
-        text-decoration: none;
-        color: #333;
-        &:hover,
-        &:active {
-          color: #000;
-        }
-      }
-    }
-    p {
-      margin: 0;
-      font-weight: 300;
-      font-size: 0.8em;
-    }
-  }
-  .game-info {
-    flex: 1 1 40%;
-    color: #777;
-    h2 {
-      font-size: 1.5em;
-      margin: 0;
-      padding: 0;
-      font-weight: 400;
-    }
-    p {
-      margin: 4px;
-    }
-    .game-loc {
-      font-variant: small-caps;
-    }
-    table {
-      margin: 16px auto 0 auto;
-      border-collapse: collapse;
-      font-size: 0.8em;
-      font-weight: 400;
-      color: #333;
-      .totals {
-        font-weight: 500;
-      }
-      thead {
-        background: #f0f0f0;
-        padding: 4px;
-        font-size: 0.75em;
-        th {
-          font-weight: 400;
-        }
-        .final {
-          text-align: left;
-          padding: 6px;
-        }
-        .break {
-          width: 24px;
-        }
-
-      }
-      tbody {
-        tr {
-          background: #f7f7f7;
-          td {
-            padding: 6px;
-          }
-          .team-name {
-            text-align: left;
-            font-weight: 500;
-            text-transform: uppercase;
-            padding-right: 24px;
-          }
-        }
-      }
-    }
-    .pitchers {
-      text-align: left;
-      font-size: 0.8em;
-      color: #333;
-      font-weight: 500;
-      span {
-        display: inline-block;
-        margin-right: 12px;
-      }
-    }
-  }
-
-  .team-info {
-    flex: 1 1 50%;
-    color: #444;
-    .starting-pitcher {
-      font-size: 1.2em;
-      margin: 0;
-      padding: 0;
-    }
-    .pitcher-record,
-    .pitcher-stats {
-      margin: 0;
-      margin-top: 4px;
-    }
-    table {
-      width: 80%;
-      margin: 12px auto;
-      border-collapse: collapse;
-      .two,
-      .four,
-      .six,
-      .eight {
-        background: #eee;
-      }
-      th {
-        background: #003d73;
-        color: #fffdfb;
-        text-transform: uppercase;
-        padding: 6px;
-        font-size: 0.8em;
-      }
-      td {
-        padding: 6px;
-        font-size: 0.8em;
-      }
-      .player-name {
-        text-align: left;
-        font-weight: 400;
-        .order {
-          font-weight: 500;
-          color: #777;
-        }
-        .pos {
-          font-weight: 500;
-          font-size: 0.75em;
-        }
-      }
-      .sub {
-        padding-left: 28px;
-      }
-      .totals {
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        td {
-          padding-top: 8px;
-          padding-bottom: 8px;
-          font-weight: 500;
-        }
-      }
-    }
-  }
-  .big-plays {
-    width: 80%;
-    margin: 0 auto;
-    padding: 0;
-    p {
-      text-align: left;
-      font-size: 0.7em;
-      margin: 6px;
-    }
-  }
-  .stat-category {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    font-size: 0.8em;
-    font-weight: 700;
-    
-  }
-  
-
+  padding-top: 100px;
 }
 
-.game-details {
+.game-container {
   background: #fffdfb;
+  display: flex;
   margin: 0 auto;
   padding: 0;
+  padding-top: 50px;
+  text-align: center;
   width: 90vw;
-  padding-bottom: 28px;
+}
+
+.team-title {
   color: #333;
-  .game-summary {
-    width: 87.5%;
-    margin: 0 auto;
-    font-size: 0.7em;
-    p {
-      margin: 0;
-      padding: 0;
+  flex: 1 1 25%;
+  h3 {
+    font-weight: 200;
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    &:hover {
+      color: #777;
+    }
+  }
+  p {
+    font-size: 0.8em;
+    font-weight: 300;
+    margin: 0;
+  }
+}
+
+.game-overview {
+  color: #575859;
+  flex: 1 1 50%;
+  h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+  p {
+    margin: 4px;
+  }
+}
+
+.inning-detail {
+  border-collapse: collapse;
+  color: #333;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin: 16px auto 0 auto;
+  thead {
+    background: #f0f0f0;
+    font-size: 0.75em;
+  }
+  th {
+    font-weight: 400;
+    height: 20px;
+    padding: 4px;
+    width: 20px;
+  }
+  td {
+    height: 20px;
+    padding: 4px;
+    width: 20px;
+  }
+  .totals {
+    font-weight: 500;
+  }
+  .team-name {
+    font-weight: 500;
+    text-align: left;
+    width: 60px;
+  }
+  tbody {
+    background: #f7f7f7;
+  }
+  .pitchers {
+    color: #333;
+    font-size: 0.8em;
+    font-weight: 500;
+    text-align: left;
+    span {
+      display: inline-block;
+      margin-right: 12px;
     }
   }
 }
+
+.game-loc {
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+//   .team-info {
+//     flex: 1 1 50%;
+//     color: #444;
+//     .starting-pitcher {
+//       font-size: 1.2em;
+//       margin: 0;
+//       padding: 0;
+//     }
+//     .pitcher-record,
+//     .pitcher-stats {
+//       margin: 0;
+//       margin-top: 4px;
+//     }
+//     table {
+//       width: 80%;
+//       margin: 12px auto;
+//       border-collapse: collapse;
+//       .two,
+//       .four,
+//       .six,
+//       .eight {
+//         background: #eee;
+//       }
+//       th {
+//         background: #003d73;
+//         color: #fffdfb;
+//         text-transform: uppercase;
+//         padding: 6px;
+//         font-size: 0.8em;
+//       }
+//       td {
+//         padding: 6px;
+//         font-size: 0.8em;
+//       }
+//       .player-name {
+//         text-align: left;
+//         font-weight: 400;
+//         .order {
+//           font-weight: 500;
+//           color: #777;
+//         }
+//         .pos {
+//           font-weight: 500;
+//           font-size: 0.75em;
+//         }
+//       }
+//       .sub {
+//         padding-left: 28px;
+//       }
+//       .totals {
+//         border-top: 1px solid #ccc;
+//         border-bottom: 1px solid #ccc;
+//         td {
+//           padding-top: 8px;
+//           padding-bottom: 8px;
+//           font-weight: 500;
+//         }
+//       }
+//     }
+//   }
+//   .big-plays {
+//     width: 80%;
+//     margin: 0 auto;
+//     padding: 0;
+//     p {
+//       text-align: left;
+//       font-size: 0.7em;
+//       margin: 6px;
+//     }
+//   }
+//   .stat-category {
+//     margin: 0;
+//     padding: 0;
+//     text-align: left;
+//     font-size: 0.8em;
+//     font-weight: 700;
+    
+//   }
+  
+
+// }
+
+// .game-details {
+//   background: #fffdfb;
+//   margin: 0 auto;
+//   padding: 0;
+//   width: 90vw;
+//   padding-bottom: 28px;
+//   color: #333;
+//   .game-summary {
+//     width: 87.5%;
+//     margin: 0 auto;
+//     font-size: 0.7em;
+//     p {
+//       margin: 0;
+//       padding: 0;
+//     }
+//   }
+// }

@@ -1,0 +1,55 @@
+<table class="inning-detail">
+
+  <thead>
+
+    <tr>
+      <th class="team-name">FINAL</th>
+      <% game.innings.each do |i| %>
+        <th><%= i.inning %></th>
+      <% end %>
+      <th class="break"></th>
+      <th class="totals">R</th>
+      <th class="totals">H</th>
+      <th class="totals">E</th>
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr>
+      <td class="team-name"><%= game.visitor.abbr %></td>
+      <% game.innings.each do |i| %>
+        <td><%= i.vis_runs %></td>
+      <% end %>
+      <td class="break"></td>
+      <td class="totals"><%= game.vis_runs %></td>
+      <td class="totals"><%= game.vis_hits %></td>
+      <td class="totals"><%= game.vis_errors %></td>
+    </tr>
+
+    <tr>
+      <td class="team-name"><%= game.home.abbr %></td>
+      <% game.innings.each do |i| %>
+        <td><%= i.home_runs %></td>
+      <% end %>
+      <td class="break"></td>
+      <td class="totals"><%= game.home_runs %></td>
+      <td class="totals"><%= game.home_hits %></td>
+      <td class="totals"><%= game.home_errors %></td>
+    </tr>
+
+  </tbody>
+
+  <tfoot>
+
+    <tr>
+      <td class="pitchers" colspan="14">
+        <span>W: <%= first_dot_last(pitchers[:wp][:p]) %> (<%= "#{pitchers[:wp][:w]}-#{pitchers[:wp][:l]}" %>)</span>
+        <span>L: <%= first_dot_last(pitchers[:lp][:p]) %> (<%= "#{pitchers[:lp][:w]}-#{pitchers[:lp][:l]}" %>)</span>
+        <% if pitchers[:sp] %><span>S: <%= first_dot_last(pitchers[:sp][:p]) %> (<%= "#{pitchers[:sp][:sv]}" %>)</span><% end %>
+      </td>
+    </tr>
+
+  </tfoot>
+</table>

@@ -21,6 +21,11 @@
    overflow-x: hidden;
  }
 
+ a {
+   text-decoration: none;
+   color: inherit;
+ }
+
  .home-container {
   background-image: url('baseball-diamond.jpg');
   background-size: cover;
