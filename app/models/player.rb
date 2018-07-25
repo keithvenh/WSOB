@@ -4,4 +4,6 @@ class Player < ApplicationRecord
   has_many :depth_charts
   has_many :hitting_card_stats
   has_many :pitching_card_stats
+  has_many :pitching_stats
+  has_many :batting_stats
 end

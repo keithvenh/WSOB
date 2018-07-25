@@ -152,3 +152,58 @@ ninety_eight_pitching_card_stats.each do |row|
     hr_allowed: row['hr'],
   )
 end
+
+pitch_stat_march_text = File.read(Rails.root.join('lib', 'seeds', 'pitch_stat_march_29.csv'))
+pitch_stat_march = CSV.parse(pitch_stat_march_text, :headers => true, :encoding => 'ISO-8859-1')
+
+pitch_stat_march.each do |row|
+  PitchingStat.create!(
+    game_id: row['game_id'],
+    team_id: row['team_id'],
+    player_id: row['player_id'],
+    start: row['start'],
+    outs: row['outs'],
+    h: row['h'],
+    r: row['r'],
+    er: row['er'],
+    k: row['k'],
+    bb: row['bb'],
+    hbp: row['hbp'],
+    wp: row['wp'],
+    do: row['2b'],
+    tr: row['tr'],
+    hr: row['hr'],
+    bf: row['bf'],
+    w: row['w'],
+    l: row['l'],
+    s: row['s'],
+    bs: row['bs'],
+    hld: row['hld']
+  )
+end
+
+hit_stat_march_text = File.read(Rails.root.join('lib', 'seeds', 'hit_stat_march_29.csv'))
+hit_stat_march = CSV.parse(hit_stat_march_text, :headers => true, :encoding => 'ISO-8859-1')
+
+hit_stat_march.each do |row|
+  BattingStat.create!(
+    game_id: row['game_id'],
+    team_id: row['team_id'],
+    player_id: row['player_id'],
+    start: row['start'],
+    order: row['order'],
+    pos: row['pos'],
+    ab: row['ab'],
+    r: row['r'],
+    h: row['h'],
+    rbi: row['rbi'],
+    so: row['so'],
+    bb: row['bb'],
+    hbp: row['hbp'],
+    sac: row['sac'],
+    sb: row['sb'],
+    do: row['do'],
+    tr: row['tr'],
+    hr: row['hr']
+  )
+end

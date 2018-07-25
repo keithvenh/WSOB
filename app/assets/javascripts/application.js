@@ -75,57 +75,15 @@ jQuery(document).on('turbolinks:load', function() {
     jQuery('.conf-button').removeClass('active');
     jQuery(this).addClass('active');
   });
-
-  jQuery('.west-div-button').click(function() {
-    jQuery('.west-div-button').removeClass('active');
-    jQuery('.stand-table-west').css('display', 'none');
-    jQuery(this).addClass('active');
-  });
-
-  jQuery('.east-div-button').click(function() {
-    jQuery('.east-div-button').removeClass('active');
-    jQuery('.stand-table-east').css('display', 'none');
-    jQuery(this).addClass('active');
-  });
-
   
   jQuery("#stand-west").click(function() {
-    jQuery('#east-conf').css('display', 'none');
-    jQuery('#west-conf').css('display', 'block');
     jQuery('#east-table').css('display', 'none');
     jQuery('#west-table').css('display', 'block');
   });
 
   jQuery("#stand-east").click(function() {
-    jQuery('#west-conf').css('display', 'none');
-    jQuery('#east-conf').css('display', 'block');
     jQuery('#west-table').css('display', 'none');
     jQuery('#east-table').css('display', 'block');
-  });
-
-  
-  jQuery("#sou-div").click(function() {
-    jQuery('#stand-sou').css('display', 'block');
-  });
-
-  jQuery("#nor-div").click(function() {
-    jQuery('#stand-nor').css('display', 'block');
-  });
-
-  jQuery("#eur-div").click(function() {
-    jQuery('#stand-eur').css('display', 'block');
-  });
-
-  jQuery("#afr-div").click(function() {
-    jQuery('#stand-afr').css('display', 'block');
-  });
-
-  jQuery("#asi-div").click(function() {
-    jQuery('#stand-asi').css('display', 'block');
-  });
-
-  jQuery("#oce-div").click(function() {
-    jQuery('#stand-oce').css('display', 'block');
   });
 
   // ========== LEAGUE LEADERS ========== //

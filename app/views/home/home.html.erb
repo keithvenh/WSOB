@@ -1,7 +1,6 @@
 <div class="home-container">
 <!-- ===== GENERAL CONTAINER FOR FLEXBOX ===== -->
 <div class="container">
-
 <!-- ===== LISTS OUT GAMES BASED ON DATE ===== -->
   <div class="todays-games">
 
@@ -31,7 +30,7 @@
 
         <!-- Team Name and Record -->
         <div class="visitor">
-          <%= vis.name %><span class="record">(<%= "#{records[0][0]}-#{records[0][1]}" %>)</span>
+          <%= vis.abbr %><span class="record">(<%= "#{records[0][0]}-#{records[0][1]}" %>)</span>
         </div>
         <% if game.complete? %>
           <div class="score visitor-score">
@@ -39,7 +38,7 @@
           </div>
         <% end %>
         <div class="home">
-          <%= home.name %><span class="record">(<%= "#{records[1][0]}-#{records[1][1]}" %>)</span>
+          <%= home.abbr %><span class="record">(<%= "#{records[1][0]}-#{records[1][1]}" %>)</span>
         </div>
         <% if game.complete? %>
           <div class="score home-score">
@@ -63,18 +62,6 @@
         --><div class="conf-button east" id="stand-east">
           East
         </div>
-      </div>
-    
-<!-- Selectable Division Buttons -->
-      <div class="division" id="west-conf">
-        <div class="west-div-button eur active" id="eur-div">Europe</div><!--
-        --><div class="west-div-button nor" id="nor-div">North America</div><!--
-        --><div class="west-div-button sou" id="sou-div">South America</div>
-      </div>
-      <div class="division" id="east-conf">
-        <div class="east-div-button eur active" id="afr-div">Africa</div><!--
-        --><div class="east-div-button nor" id="asi-div">Asia</div><!--
-        --><div class="east-div-button sou" id="oce-div">Oceania</div>
       </div>
 
 <!-- STANDINGS TABLES -->
@@ -178,191 +165,194 @@
         </div>
       </div>
     </div>
+  </div>
 
 <!-- ===== LEAGUE LEADERS ===== -->
-  <div class="league-leaders">
-    <div class="categories">
-      <div class="league-leaders-button hitting active" id="leaders-hitting">
-        Hitting
-      </div><!--
-      --><div class="league-leaders-button pitching" id="leaders-pitching">
-        Pitching
+
+  <div class="standings">
+    <div class="league-leaders">
+      <div class="categories">
+        <div class="league-leaders-button hitting active" id="leaders-hitting">
+          Hitting
+        </div><!--
+        --><div class="league-leaders-button pitching" id="leaders-pitching">
+          Pitching
+        </div>
+      </div>
+      <div class="player-stats hitting-stats" id="hitting-stats">
+        <table>
+          <tr class="stat-title batting-avg">
+            <td>Batting Average</td>
+            <td class="statistic" rowspan="2"><%= ('%.3f' % @batting_leaders[:avg][1]).sub(/^0/,'') %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:avg][0].first_name %> <%= @batting_leaders[:avg][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:avg][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:avg][0].batting_stats.first.pos) %></td>
+            <td class="category">Avg</td>
+          </tr>
+
+          <tr class="stat-title batting-avg">
+            <td>Runs</td>
+            <td class="statistic" rowspan="2"><%= @batting_leaders[:runs][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:runs][0].first_name %> <%= @batting_leaders[:runs][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:runs][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:runs][0].batting_stats.first.pos) %></td>
+            <td class="category">R</td>
+          </tr>
+
+          <tr class="stat-title batting-avg">
+            <td>Home Runs</td>
+            <td class="statistic" rowspan="2"><%= @batting_leaders[:hr][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:hr][0].first_name %> <%= @batting_leaders[:hr][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:hr][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:hr][0].batting_stats.first.pos) %></td>
+            <td class="category">HR</td>
+          </tr>
+
+          <tr class="stat-title batting-avg">
+            <td>Runs Batted In</td>
+            <td class="statistic" rowspan="2"><%= @batting_leaders[:rbi][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:rbi][0].first_name %> <%= @batting_leaders[:rbi][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:rbi][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:rbi][0].batting_stats.first.pos) %></td>
+            <td class="category">RBI</td>
+          </tr>
+
+          <tr class="stat-title batting-avg">
+            <td>Hits</td>
+            <td class="statistic" rowspan="2"><%= @batting_leaders[:hits][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:hits][0].first_name %> <%= @batting_leaders[:hits][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:hits][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:hits][0].batting_stats.first.pos) %></td>
+            <td class="category">H</td>
+          </tr>
+
+          <tr class="stat-title batting-avg">
+            <td>Stolen Bases</td>
+            <td class="statistic" rowspan="2"><%= @batting_leaders[:sb][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:sb][0].first_name %> <%= @batting_leaders[:sb][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:sb][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:sb][0].batting_stats.first.pos) %></td>
+            <td class="category">SB</td>
+          </tr>
+
+          <tr class="stat-title batting-avg">
+            <td>Doubles</td>
+            <td class="statistic" rowspan="2"><%= @batting_leaders[:do][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @batting_leaders[:do][0].first_name %> <%= @batting_leaders[:do][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @batting_leaders[:do][0].team.name %> &bull; <%= pos_to_string(@batting_leaders[:do][0].batting_stats.first.pos) %></td>
+            <td class="category">2B</td>
+          </tr>
+        </table>
+      </div>
+      <div class="player-stats pitching-stats" id="pitching-stats">
+        <table>
+          <tr class="stat-title">
+            <td>Wins</td>
+            <td class="statistic" rowspan="2"><%= @leaders[:wins][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:wins][0].first_name %> <%= @leaders[:wins][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:wins][0].team.name %> &bull; P</td>
+            <td class="category">W</td>
+          </tr>
+
+          <tr class="stat-title">
+            <td>Saves</td>
+            <td class="statistic" rowspan="2"><%= @leaders[:saves][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:saves][0].first_name %> <%= @leaders[:saves][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:saves][0].team.name %> &bull; P</td>
+            <td class="category">SV</td>
+          </tr>
+
+          <tr class="stat-title">
+            <td>Earned Run Average</td>
+            <td class="statistic" rowspan="2"><%= ("%.2f" % @leaders[:era][1]) %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:era][0].first_name %> <%= @leaders[:era][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:era][0].team.name %> &bull; P</td>
+            <td class="category">ERA</td>
+          </tr>
+
+          <tr class="stat-title">
+            <td>Strikeouts</td>
+            <td class="statistic" rowspan="2"><%= @leaders[:k][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:k][0].first_name %> <%= @leaders[:k][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:k][0].team.name %> &bull; P</td>
+            <td class="category">SO</td>
+          </tr>
+
+          <tr class="stat-title">
+            <td>WHIP</td>
+            <td class="statistic" rowspan="2"><%= ("%.2f" % @leaders[:whip][1]) %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:whip][0].first_name %> <%= @leaders[:whip][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:whip][0].team.name %> &bull; P</td>
+            <td class="category">WHIP</td>
+          </tr>
+
+          <tr class="stat-title">
+            <td>Batters Faced</td>
+            <td class="statistic" rowspan="2"><%= @leaders[:bf][1] %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:bf][0].first_name %> <%= @leaders[:bf][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:bf][0].team.name %> &bull; P</td>
+            <td class="category">BF</td>
+          </tr>
+
+          <tr class="stat-title">
+            <td>Strikeouts per Walk</td>
+            <td class="statistic" rowspan="2"><%= ("%.2f" % @leaders[:kbb][1]) %></td>
+          </tr>
+          <tr class="leader-name">
+            <td><%= @leaders[:kbb][0].first_name %> <%= @leaders[:kbb][0].last_name %></td>
+          </tr>
+          <tr class="information">
+            <td class="leader-team leader-position"><%= @leaders[:kbb][0].team.name %> &bull; P</td>
+            <td class="category">K/BB</td>
+          </tr>
+        </table>
       </div>
     </div>
-    <div class="player-stats hitting-stats" id="hitting-stats">
-      <table>
-        <tr class="stat-title batting-avg">
-          <td>Batting Average</td>
-          <td class="statistic" rowspan="2">.667</td>
-        </tr>
-        <tr class="leader-name">
-          <td>John Olerud</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Russia &bull; 1B</td>
-          <td class="category">Avg</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Runs</td>
-          <td class="statistic" rowspan="2">6</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Sammy Sosa</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Russia &bull; RF</td>
-          <td class="category">R</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Home Runs</td>
-          <td class="statistic" rowspan="2">3</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Eddie Murray</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Japan &bull; 1B</td>
-          <td class="category">HR</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Runs Batted In</td>
-          <td class="statistic" rowspan="2">3</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Eddie Murray</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Japan &bull; 1B</td>
-          <td class="category">RBI</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Hits</td>
-          <td class="statistic" rowspan="2">9</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Ty Cobb</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Morocco &bull; CF</td>
-          <td class="category">H</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Stolen Bases</td>
-          <td class="statistic" rowspan="2">3</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Ty Cobb</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Morocco &bull; CF</td>
-          <td class="category">SB</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Doubles</td>
-          <td class="statistic" rowspan="2">4</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Craig Biggio</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Russia &bull; 2B</td>
-          <td class="category">2B</td>
-        </tr>
-      </table>
-    </div>
-    <div class="player-stats pitching-stats" id="pitching-stats">
-      <table>
-        <tr class="stat-title batting-avg">
-          <td>Wins</td>
-          <td class="statistic" rowspan="2">1</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Don Drysdale</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Morocco &bull; P</td>
-          <td class="category">W</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Saves</td>
-          <td class="statistic" rowspan="2">1</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Kerry Lightenberg</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Morocco &bull; P</td>
-          <td class="category">SV</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Earned Run Average</td>
-          <td class="statistic" rowspan="2">0.00</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Ferguson Jenkins</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Cuba &bull; P</td>
-          <td class="category">ERA</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Strikeouts</td>
-          <td class="statistic" rowspan="2">11</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Catfish Hunter</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Cuba &bull; P</td>
-          <td class="category">SO</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>WHIP</td>
-          <td class="statistic" rowspan="2">.56</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Pud Galvin</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">United Kingdom &bull; P</td>
-          <td class="category">WHIP</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Batters Faced</td>
-          <td class="statistic" rowspan="2">44</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Al Spalding</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Japan &bull; P</td>
-          <td class="category">BF</td>
-        </tr>
-
-        <tr class="stat-title batting-avg">
-          <td>Strikeouts per Walk</td>
-          <td class="statistic" rowspan="2">3.00</td>
-        </tr>
-        <tr class="leader-name">
-          <td>Pedro Martinez</td>
-        </tr>
-        <tr class="information">
-          <td class="leader-team leader-position">Russia &bull; P</td>
-          <td class="category">K/BB</td>
-        </tr>
-      </table>
-    </div>
   </div>
-</div>
 </div>

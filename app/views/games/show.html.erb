@@ -50,14 +50,16 @@
               <td colspan='14'>
                 <div class="pitchers">
                 
-                  <%# <% winner = PitchingStat.where(game: @game, w: true).first %> %> %>
-                  <%# <% w_rec = pitcher_wins_losses(winner.player, @game) %> %>
+                  <% winner = PitchingStat.where(game: @game, w: true).first %>
+                  <% w_rec = pitcher_wins_losses(winner.player, @game) %>
                   
-                  <%# <% loser = PitchingStat.where(game: @game, l: true).first %> %>
-                  <%# <% l_rec = pitcher_wins_losses(loser.player, @game) %> %>
+                  <% loser = PitchingStat.where(game: @game, l: true).first %>
+                  <% l_rec = pitcher_wins_losses(loser.player, @game) %>
 
-                  <%# <% save = PitchingStat.where(game: @game, s: true).first %> %>
-                  <%# <p><span class="win">W: <%= "#{winner.player.first_name[0]}. #{winner.player.last_name}" %> (<%#= "#{w_rec[0]}-#{w_rec[1]}" %>)</span> <span class="loss">L: <%#= "#{loser.player.first_name[0]}. #{loser.player.last_name}" %> (<%#= "#{l_rec[0]}-#{l_rec[1]}" %>)</span> <span class="save"></span>
+                  <% save = PitchingStat.where(game: @game, s: true).first %>
+                  <% s_rec = PitchingStat.where('player_id = ? and s = ? and game_id <= ?', save.player.id, true, @game.id).count if save %>
+
+                  <p><span class="win">W: <%= "#{winner.player.first_name[0]}. #{winner.player.last_name}" %> (<%= "#{w_rec[0]}-#{w_rec[1]}"  %>)</span> <span class="loss">L: <%= "#{loser.player.first_name[0]}. #{loser.player.last_name}" %> (<%= "#{l_rec[0]}-#{l_rec[1]}" %>)</span> <span class="save"><% if save %>SV: <%= "#{save.player.first_name[0]}. #{save.player.last_name}" %> (<%= s_rec %>)<% end %></span>
                 
                 </div>
               </td>
