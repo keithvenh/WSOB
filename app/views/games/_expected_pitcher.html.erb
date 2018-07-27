@@ -1,0 +1,10 @@
+<% last_game = Game.where('home_id = ? or visitor_id = ?', team.id, team.id) %>
+<% game_num = last_game.where('id <= ?', game.id).count %>
+<% s_num = game_num % 5 %>
+<% rot = PitchingRotation.where('team_id = ? and rank = ?', team.id, s_num).first %>
+<% p_stats = PitchingStat.where(player_id: rot.player.id) %>
+
+
+<h5 class="starting-pitcher"><%= rot.player.first_name %> <%= rot.player.last_name %></h5>
+<p class="pitcher-record"><%= get_wins(rot.player, game) %>-<%= get_losses(rot.player, game) %></p>
+<p class="pitcher-stats"><%= ("%.2f" % p_stats.sum(:er)) %> ERA &bull; <%= p_stats.sum(:k) %> K

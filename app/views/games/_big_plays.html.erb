@@ -1,0 +1,61 @@
+<% stats = BattingStat.where(game_id: game.id, team_id: team) %>
+
+<% big_plays = {do: stats.where('do > ?', 0), tr: stats.where('tr > ?', 0), hr: stats.where('hr > ?', 0), rbi: stats.where('rbi > ?', 0), sb: stats.where('sb > ?', 0) } %>
+
+<div class="play-details">
+  <% if stats.sum(:do) > 0 %>
+    <p><b>2B:</b>
+      <% big_plays[:do].each do |stat| %>
+        <span><%= last_comma_first(stat.player) %></span>
+        <span><%= stat.do %></span>
+        <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', stat.player, game.id).sum(:do) %>)</span>
+        <span><%= stat == big_plays[:do].last ? "." : ";" %></span>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if stats.sum(:tr) > 0 %>
+    <p><b>3B:</b>
+      <% big_plays[:tr].each do |stat| %>
+        <span><%= last_comma_first(stat.player) %></span>
+        <span><%= stat.tr %></span>
+        <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', stat.player, game.id).sum(:tr) %>)</span>
+        <span><%= stat == big_plays[:tr].last ? "." : ";" %></span>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if stats.sum(:hr) > 0 %>
+    <p><b>HR:</b>
+      <% big_plays[:hr].each do |stat| %>
+        <span><%= last_comma_first(stat.player) %></span>
+        <span><%= stat.hr %></span>
+        <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', stat.player, game.id).sum(:hr) %>)</span>
+        <span><%= stat == big_plays[:hr].last ? "." : ";" %></span>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if stats.sum(:rbi) > 0 %>
+    <p><b>RBI:</b>
+      <% big_plays[:rbi].each do |stat| %>
+        <span><%= last_comma_first(stat.player) %></span>
+        <span><%= stat.rbi %></span>
+        <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', stat.player, game.id).sum(:rbi) %>)</span>
+        <span><%= stat == big_plays[:rbi].last ? "." : ";" %></span>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if stats.sum(:sb) > 0 %>
+    <p><b>SB:</b>
+      <% big_plays[:sb].each do |stat| %>
+        <span><%= last_comma_first(stat.player) %></span>
+        <span><%= stat.sb %></span>
+        <span>(<%= BattingStat.where('player_id = ? and game_id <= ?', stat.player, game.id).sum(:sb) %>)</span>
+        <span><%= stat == big_plays[:sb].last ? "." : ";" %></span>
+      <% end %>
+    </p>
+  <% end %>
+
+</div>

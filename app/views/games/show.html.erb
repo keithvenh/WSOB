@@ -26,4 +26,70 @@
 
   </div>
 
+  <div class="game-container">
+
+    <div class="pitching-info">
+
+      <%= render 'pitching_info', {game: @game, team: @game.visitor } %>
+
+    </div>
+
+    <div class="pitching-info">
+
+      <%= render 'pitching_info', {game: @game, team: @game.home } %>
+
+    </div>
+
+  </div>
+
+  <div class="game-container">
+
+    <div class="batting-info">
+
+      <%= render 'batting_info', {game: @game, team: @game.visitor} %>
+
+    </div>
+
+    <div class="batting-info">
+
+      <%= render 'batting_info', {game: @game, team: @game.home } %>
+
+    </div>
+
+  </div>
+
+  <div class="game-container">
+  
+    <% if @game.complete? %>
+
+      <div class="big-plays">
+
+        <%= render 'big_plays', {game: @game, team: @game.visitor} %>
+
+      </div>
+
+      <div class="big-plays">
+
+        <%= render 'big_plays', {game: @game, team: @game.home} %>
+
+      </div>
+
+    <% else %>
+
+      <div class="rest">
+
+        <%= render 'players_to_rest', {game: @game, team: @game.visitor} %>
+
+      </div>
+
+      <div class="rest">
+
+        <%= render 'players_to_rest', {game: @game, team: @game.home} %>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
 </div>

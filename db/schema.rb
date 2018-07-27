@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180724175201) do
+ActiveRecord::Schema.define(version: 20180727211745) do
 
   create_table "batting_stats", force: :cascade do |t|
     t.integer "game_id"
@@ -157,6 +157,16 @@ ActiveRecord::Schema.define(version: 20180724175201) do
     t.index ["player_id"], name: "index_pitching_card_stats_on_player_id"
   end
 
+  create_table "pitching_rotations", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "rank"
+    t.integer "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_pitching_rotations_on_player_id"
+    t.index ["team_id"], name: "index_pitching_rotations_on_team_id"
+  end
+
   create_table "pitching_stats", force: :cascade do |t|
     t.integer "game_id"
     t.integer "team_id"
@@ -193,7 +203,25 @@ ActiveRecord::Schema.define(version: 20180724175201) do
     t.string "deck"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "primary_pos"
+    t.string "deck_team"
     t.index ["team_id"], name: "index_players_on_team_id"
+  end
+
+  create_table "starters", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "catch"
+    t.integer "first"
+    t.integer "second"
+    t.integer "third"
+    t.integer "short"
+    t.integer "left"
+    t.integer "center"
+    t.integer "right"
+    t.integer "dh"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_starters_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|

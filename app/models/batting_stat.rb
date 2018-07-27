@@ -3,6 +3,15 @@ class BattingStat < ApplicationRecord
   belongs_to :team
   belongs_to :player
 
+  def self.calc_avg(player, games)
+
+    ab = games.sum(:ab) == 0 ? 1: games.sum(:ab)
+    hits = games.sum(:h)
+
+    return (hits/ab.to_f)
+    
+  end
+
   def self.calc_stats(b)
 
     games = BattingStat.where(player_id: b)

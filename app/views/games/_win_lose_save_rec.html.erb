@@ -1,0 +1,7 @@
+<% if ps.w? %>
+  (W, <%= get_wins(ps.player, game) %>-<%= get_losses(ps.player, game) %>)
+<% elsif ps.l? %>
+  (L, <%= get_wins(ps.player, game) %>-<%= get_losses(ps.player, game) %>)
+<% elsif ps.s? %>
+  (S, <%= PitchingStat.where('game_id <= ? and player_id = ? and s = ?', game.id, ps.player.id, true).count %>)
+<% end %>

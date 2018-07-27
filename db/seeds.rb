@@ -56,7 +56,9 @@ hof_deck.each do |row|
     first_name: row['first'],
     last_name: row['last'],
     team_id: row['team'],
-    deck: row['deck']
+    deck: row['deck'],
+    primary_pos: row['primary_pos'],
+    deck_team: row['deck_team']
   )
 end
 
@@ -69,7 +71,9 @@ ninety_eight_deck.each do |row|
     first_name: row['first'],
     last_name: row['last'],
     team_id: row['team'],
-    deck: row['deck']
+    deck: row['deck'],
+    primary_pos: row['primary_pos'],
+    deck_team: row['deck_team']
   )
 end
 

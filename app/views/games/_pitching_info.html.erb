@@ -1,0 +1,46 @@
+<% if game.complete? %>
+  <table class="pitching-stats <%= team.division[0..2].downcase %>-table">
+
+    <%= render 'pitching_table_headers', team: team %>
+
+    <tbody>
+      <% team_stats = PitchingStat.where(game: game, team: team) %>
+      <% i = 1 %>
+      <% team_stats.each do |ps| %>
+
+        <tr class="<%= num_to_string(i) %>">
+          <td class="name"><%= first_dot_last(ps.player) %> <span class="record"><%= render 'win_lose_save_rec', {ps: ps, game: game} %></span></td>
+          <td><%= outs_to_ip(ps.outs) %></td>
+          <td><%= ps.h %></td>
+          <td><%= ps.r %></td>
+          <td><%= ps.er %></td>
+          <td><%= ps.k %></td>
+          <td><%= ps.bb %></td>
+          <td><%= ps.hr %></td>
+          <td><%= ("%.2f" % ((ps.er / (ps.outs / 3.to_f)) * 9)) %></td>
+        </tr>
+
+        <% i += 1 %>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <tr class="totals">
+        <td>TOTALS</td>
+        <td><%= outs_to_ip(team_stats.sum(:outs)) %></td>
+        <td><%= team_stats.sum(:h) %></td>
+        <td><%= team_stats.sum(:r) %></td>
+        <td><%= team_stats.sum(:er) %></td>
+        <td><%= team_stats.sum(:bb) %></td>
+        <td><%= team_stats.sum(:k) %></td>
+        <td><%= team_stats.sum(:hr) %></td>
+        <td></td>
+      </tr>
+    </tfoot>
+
+  </table>
+
+<% else %>
+
+  <%= render 'expected_pitcher', {game: game, team: team} %>
+<% end %>

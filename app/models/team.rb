@@ -4,4 +4,6 @@ class Team < ApplicationRecord
 
   has_many :wins, :foreign_key => "winner_id", :class_name => "Game"
   has_many :losses, :foreign_key => "loser_id", :class_name => "Game"
+
+  has_one :starter
 end

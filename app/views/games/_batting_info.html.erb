@@ -1,0 +1,71 @@
+<table class="batting-stats <%= team.division[0..2].downcase %>-table">
+
+  <%= render 'batting_table_headers', team: team %>
+
+  <tbody>
+
+    <% if game.complete? %>
+
+      <% team_stats = BattingStat.where(game: game, team: team) %>
+      <% team_stats.each do |bs| %>
+        <tr class="<%= num_to_string(bs.order) %>">
+          <td class="name <%= "sub" if !bs.start? %>">
+            <span class="order"><%= bs.order if bs.start? %></span>
+            <%= first_dot_last(bs.player) %>
+            <span class="pos"><%= pos_to_string(bs.pos) %></span>
+          </td>
+          <td><%= bs.ab %></td>
+          <td><%= bs.r %></td>
+          <td><%= bs.h %></td>
+          <td><%= bs.rbi %></td>
+          <td><%= bs.so %></td>
+          <td><%= bs.bb + bs.hbp %></td>
+          <td><%= bs.sb %></td>
+          <td><%= bs.do + bs.tr + bs.hr %></td>
+          <td><%= ("%.3f" % (calc_avg(bs.player, {game: game}))).sub(/^0/, '') %></td>
+        </tr>
+      <% end %>
+
+    <% else %>
+
+      <% team_stats = Player.where('team_id = ? and primary_pos != ?', team, 1) %>
+      <% i = 1 %>
+      <% team_stats.each do |bs| %>
+        <tr class="<%= num_to_string(i) %>"%>
+          <% stats = bs.batting_stats %>
+          <td class="name"><%= first_dot_last(bs) %></td>
+          <td><%= stats.sum(:ab) %></td>
+          <td><%= stats.sum(:r) %></td>
+          <td><%= stats.sum(:h) %></td>
+          <td><%= stats.sum(:rbi) %></td>
+          <td><%= stats.sum(:so) %></td>
+          <td><%= stats.sum(:bb) + stats.sum(:hbp) %></td>
+          <td><%= stats.sum(:sb) %></td>
+          <td><%= stats.sum(:do) + stats.sum(:tr) + stats.sum(:hr) %></td>
+          <td><%= ("%.3f" % (calc_avg(bs))).sub(/^0/, '') %></td>
+        </tr>
+        <% i += 1 %>
+    <% end %>
+
+  <% end %>
+
+  </tbody>
+
+  <tfoot>
+
+    <% team_stats = BattingStat.where(team: team) %>
+    <tr class="totals">
+      <td>TOTALS</td>
+      <td><%= team_stats.sum(:ab) %></td>
+      <td><%= team_stats.sum(:r) %></td>
+      <td><%= team_stats.sum(:h) %></td>
+      <td><%= team_stats.sum(:rbi) %></td>
+      <td><%= team_stats.sum(:so) %></td>
+      <td><%= team_stats.sum(:bb) + team_stats.sum(:hbp) %></td>
+      <td><%= team_stats.sum(:sb) %></td>
+      <td><%= team_stats.sum(:do) + team_stats.sum(:tr) + team_stats.sum(:hr) %></td>
+      <td></td>
+    
+  </tfoot>
+
+</table>

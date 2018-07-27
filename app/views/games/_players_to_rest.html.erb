@@ -1,0 +1,12 @@
+<% resting = players_to_rest(team) %>
+
+<div class="resting">
+  <h5>The following players must rest for today's game:</h5>
+  <% if resting.empty? %>
+    <p><%= "No players must rest today." %></p>
+  <% else %>
+    <% resting.each do |r| %>
+      <p><%= r %></p>
+    <% end %>
+  <% end %>
+</div>
