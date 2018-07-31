@@ -8,9 +8,9 @@
 
       <% team_stats = BattingStat.where(game: game, team: team) %>
       <% team_stats.each do |bs| %>
-        <tr class="<%= num_to_string(bs.order) %>">
+        <tr class="<%= num_to_string(bs.bat_order) %>">
           <td class="name <%= "sub" if !bs.start? %>">
-            <span class="order"><%= bs.order if bs.start? %></span>
+            <span class="order"><%= bs.bat_order if bs.start? %></span>
             <%= first_dot_last(bs.player) %>
             <span class="pos"><%= pos_to_string(bs.pos) %></span>
           </td>

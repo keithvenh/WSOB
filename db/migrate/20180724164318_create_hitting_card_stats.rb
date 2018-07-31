@@ -14,6 +14,8 @@ class CreateHittingCardStats < ActiveRecord::Migration[5.1]
       t.integer :cs
       t.float :slg
       t.float :obp
+      t.string :deck
+      t.string :team
 
       t.timestamps
     end

@@ -2,8 +2,7 @@
   <div class="team-details">
     <div class="heading">
       <h2><%= @team.name %></h2>
-      <% record = team_wins_losses(@team, Date.today) %>
-      <p>(<%= "#{record[0]}-#{record[1]}" %>)</p>
+      <p>(<%= "#{get_wins(@team, Game.last)}-#{get_losses(@team, Game.last)}" %>)</p>
     </div>
 
     <h3>Roster</h3>

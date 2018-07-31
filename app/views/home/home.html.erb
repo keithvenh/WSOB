@@ -9,7 +9,7 @@
       <!-- Set Home and Visitor for Game -->
       <% vis = Team.find(game.visitor_id) %>
       <% home = Team.find(game.home_id) %>
-      <% records = [team_wins_losses(vis, game.date), team_wins_losses(home, game.date)] %>
+      <% records = [get_wins(vis, game), get_losses(home, game)] %>
     <a href="<%= game_path(game) %>">
       <!-- Add complete class base on record -->
       <div class="game <%= 'complete' if game.complete? %> <%= home.conference.downcase %>">
@@ -266,7 +266,7 @@
           </tr>
         </table>
       </div>
-      <div class="player-stats pitching-stats" id="pitching-stats">
+      <div class="player-stats hitting-stats" id="pitching-stats">
         <table>
           <tr class="stat-title">
             <td>Wins</td>
@@ -342,7 +342,7 @@
 
           <tr class="stat-title">
             <td>Strikeouts per Walk</td>
-            <td class="statistic" rowspan="2"><%= ("%.2f" % @leaders[:kbb][1]) %></td>
+            <td class="statistic" rowspan="2"><%= ("%.1f" % @leaders[:kbb][1]) %></td>
           </tr>
           <tr class="leader-name">
             <td><%= @leaders[:kbb][0].first_name %> <%= @leaders[:kbb][0].last_name %></td>

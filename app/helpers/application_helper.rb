@@ -50,8 +50,10 @@ module ApplicationHelper
     team_list = {}
 
     teams.each do |t|
-      rec = team_wins_losses(t, Date.today)
-      team_list.store(t.name, { :id => t.id, :wins => rec[0], :losses => rec[1], :win_pct => (rec[0]+rec[1] > 0) ? ((rec[0].to_f)/(rec[0]+rec[1])) : 0.000 })
+      wins = get_wins(t, Game.last)
+      losses = get_losses(t, Game.last)
+      gp = wins + losses
+      team_list.store(t.name, { :id => t.id, :wins => wins, :losses => losses, :win_pct => (gp > 0) ? ((wins.to_f)/(gp)) : 0.000 })
     end
 
     return team_list.sort_by { |k,v| v[:win_pct] }.reverse

@@ -5,7 +5,7 @@ class CreateBattingStats < ActiveRecord::Migration[5.1]
       t.references :team, foreign_key: true
       t.references :player, foreign_key: true
       t.boolean :start, default: true
-      t.integer :order
+      t.integer :bat_order
       t.integer :pos
       t.integer :ab
       t.integer :r, default: 0

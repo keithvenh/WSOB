@@ -1,9 +1,9 @@
-<% h = @player.hitting_card_stats.first %>
-<% p = @player.pitching_card_stats.first %>
+<% h_stats = @player.hitting_card_stats %>
+<% p_stats = @player.pitching_card_stats %>
 <div style="padding-top: 75px;">
 <h3><%= @player.first_name %> <%= @player.last_name %></h3>
 <p><%= @player.team.name %></p>
-<% if h %>
+<% if h_stats.exists? %>
   <table style="text-align:center">
     <tr>
       <th colspan="13">
@@ -24,9 +24,10 @@
       <th>SLG</th>
       <th>OBP</th>
     </tr>
+    <% h_stats.each do |h| %>
     <tr>
-      <td><%= @player.deck %></td>
-      <td><%= @player.deck_team %></td>
+      <td><%= h.deck %></td>
+      <td><%= h.team %></td>
       <td><%= h.avg %></td>
       <td><%= h.ab %></td>
       <td><%= h.do %></td>
@@ -40,16 +41,18 @@
       <td><%= h.slg %></td>
       <td><%= h.obp %></td>
     </tr>
+    <% end %>
   </table>
 <% end %>
 
-<% if p %>
+<% if p_stats.exists? %>
   <table style="text-align:center">
     <tr>
       <th colspan="13">
     </tr>
     <tr> 
       <th>Year</th>
+      <th>Team</th>
       <th>W</th>
       <th>L</th>
       <th>ERA</th>
@@ -61,8 +64,10 @@
       <th>K</th>
       <th>Homeruns Allowed</th>
     </tr>
+    <% p_stats.each do |p| %>
     <tr>
-      <td><%= @player.deck %></td>
+      <td><%= p.deck %></td>
+      <td><%= p.team %></td>
       <td><%= p.w %></td>
       <td><%= p.l %></td>
       <td><%= p.era %></td>
@@ -74,6 +79,7 @@
       <td><%= p.so %></td>
       <td><%= p.hr_allowed %></td>
     </tr>
+    <% end %>
   </table>
 <% end %>
 </div>

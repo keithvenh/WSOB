@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20180727211745) do
     t.integer "team_id"
     t.integer "player_id"
     t.boolean "start", default: true
-    t.integer "order"
+    t.integer "bat_order"
     t.integer "pos"
     t.integer "ab"
     t.integer "r", default: 0
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 20180727211745) do
     t.integer "cs"
     t.float "slg"
     t.float "obp"
+    t.string "deck"
+    t.string "team"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_hitting_card_stats_on_player_id"
@@ -152,6 +154,8 @@ ActiveRecord::Schema.define(version: 20180727211745) do
     t.integer "bb"
     t.integer "so"
     t.integer "hr_allowed"
+    t.string "deck"
+    t.string "team"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["player_id"], name: "index_pitching_card_stats_on_player_id"
@@ -200,11 +204,8 @@ ActiveRecord::Schema.define(version: 20180727211745) do
     t.string "first_name"
     t.string "last_name"
     t.integer "team_id"
-    t.string "deck"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "primary_pos"
-    t.string "deck_team"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 

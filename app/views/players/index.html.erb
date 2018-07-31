@@ -1,5 +1,5 @@
 <div style="padding-top: 75px">
-<% @players.each do |p| %>
-  <p><%= link_to "[#{p.id}] #{p.first_name} #{p.last_name}", player_path(p.id) %></p>
-<% end %>
+  <p>AVG: <%= ("%.3f" % HittingCardStat.average(:avg)).sub(/^0/, "") %></p>
+  <p>SLG: <%= ("%.3f" % HittingCardStat.average(:slg)).sub(/^0/, "") %></p>
+  <p>OBP: <%= ("%.3f" % HittingCardStat.average(:obp)).sub(/^0/, "") %></p>
 </div>

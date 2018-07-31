@@ -12,6 +12,8 @@ class CreatePitchingCardStats < ActiveRecord::Migration[5.1]
       t.integer :bb
       t.integer :so
       t.integer :hr_allowed
+      t.string :deck
+      t.string :team
 
       t.timestamps
     end
