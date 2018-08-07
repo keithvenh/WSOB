@@ -10,7 +10,8 @@
 
   <div class="game-container">
 
-    <div class="team-title visitor">
+    <div class="team-title visitor"> 
+      <%= link_to (image_tag "#{@game.visitor.abbr.downcase}.png", alt: "#{@game.visitor.name} Flag", class: "team-flag"), team_path(@game.visitor) %>
       <h3><%= link_to @game.visitor.name, team_path(@game.visitor) %></h3>
       <p>(<%= "#{vis[:wins]}-#{vis[:losses]}" %>)</p>
     </div>
@@ -20,6 +21,7 @@
     </div>
 
     <div class="team-title home">
+      <%= link_to (image_tag "#{@game.home.abbr.downcase}.png", alt: "#{@game.visitor.name} Flag", class: "team-flag"), team_path(@game.home) %>
       <h3><%= link_to @game.home.name, team_path(@game.home) %></h3>
       <p>(<%= "#{home[:wins]}-#{home[:losses]}" %>)</p>
     </div>

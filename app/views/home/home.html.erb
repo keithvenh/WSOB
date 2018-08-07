@@ -9,10 +9,9 @@
       <!-- Set Home and Visitor for Game -->
       <% vis = Team.find(game.visitor_id) %>
       <% home = Team.find(game.home_id) %>
-      <% records = [get_wins(vis, game), get_losses(home, game)] %>
     <a href="<%= game_path(game) %>">
       <!-- Add complete class base on record -->
-      <div class="game <%= 'complete' if game.complete? %> <%= home.conference.downcase %>">
+      <div class="game <%= 'complete' if game.complete? %>">
         <div class="game-header">
           <div class="game-loc"><%= home.city %></div>
 
@@ -29,19 +28,19 @@
         </div>
 
         <!-- Team Name and Record -->
-        <div class="visitor">
-          <%= vis.abbr %><span class="record">(<%= "#{records[0][0]}-#{records[0][1]}" %>)</span>
+        <div class="visitor<%= " loser" if game.loser == vis %>">
+          <%= vis.abbr %><span class="record">(<%= "#{get_wins(vis, game)}-#{get_losses(vis, game)}" %>)</span>
         </div>
         <% if game.complete? %>
-          <div class="score visitor-score">
+          <div class="score visitor-score<%= " loser" if game.loser == vis %>">
             <%= game.vis_runs %>
           </div>
         <% end %>
-        <div class="home">
-          <%= home.abbr %><span class="record">(<%= "#{records[1][0]}-#{records[1][1]}" %>)</span>
+        <div class="home<%= " loser" if game.loser == home %>">
+          <%= home.abbr %><span class="record">(<%= "#{get_wins(home, game)}-#{get_losses(home, game)}" %>)</span>
         </div>
         <% if game.complete? %>
-          <div class="score home-score">
+          <div class="score home-score<%= " loser" if game.loser == home %>">
             <%= game.home_runs %>
           </div>
         <% end %>

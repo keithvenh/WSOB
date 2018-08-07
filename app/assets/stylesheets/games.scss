@@ -34,6 +34,11 @@
   }
 }
 
+.team-flag {
+  width: 50%;
+  border: 1px solid #ddd;
+}
+
 .game-overview {
   color: #575859;
   flex: 1 1 50%;
@@ -154,39 +159,102 @@
   }
 }
 
-.sou-table {
-  thead {
-    background: #ff7400;
-  }
+thead.fra {
+  background: #002395;
 }
-.eur-table {
-  thead {
-    background: #ba131a;
-  }
+thead.ger {
+  background: #000;
 }
-.afr-table {
-  thead {
-    background: #003d73;
-  }
+thead.ita {
+  background: #009246;
 }
-.oce-table {
-  thead {
-    background: #7da7d8;
-    color: #333;
-  }
+thead.spa {
+  background: #ffc400;
 }
-.nor-table {
-  thead {
-    background: #fff200;
-    color: #333;
-  }
-}
-.asi-table {
-  thead {
-    background-color: #407927;
-  }
+thead.uk {
+  background: #cf142b;
 }
 
+thead.can {
+  background: #ff0000;
+}
+thead.cub {
+  background: #cf1426;
+}
+thead.dr {
+  background: #002d62;
+}
+thead.mex {
+  background: #006847;
+}
+thead.us {
+  background: #b22234;
+}
+thead.arg {
+  background: #74acdf;
+}
+thead.bra {
+  background: #009b3a;
+}
+thead.col {
+  background: #fcd116;
+  color: #333;
+}
+thead.per {
+  background: #d91023;
+}
+thead.ven {
+  background: #ffcc00;
+  color: #333;
+}
+
+thead.egy {
+  background: #ce1126;
+}
+thead.eth {
+  background: #078930;
+}
+thead.ken {
+  background: #006600;
+}
+thead.mor {
+  background: #c0272d;
+}
+thead.sa {
+  background: #007a4c;
+}
+
+thead.chi {
+  background: #de2910;
+}
+thead.ind {
+  background: #ff9933;
+}
+thead.jap {
+  background: #bc002d;
+}
+thead.rus {
+  background: #0039a6; 
+}
+thead.tha {
+  background: #ed1c24;
+}
+
+thead.aus {
+  background: #00008b;
+}
+thead.fij {
+  background: #68bfe5;
+}
+thead.nz {
+  background: #00247d;
+}
+thead.png {
+  background: #ce1126;
+}
+thead.sam {
+  background: #ce1126;
+}
 .starting-pitcher {
   color: #444;
   font-size: 1.2em;
